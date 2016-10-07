@@ -1,17 +1,19 @@
 package com.company.processor.renderer.impl;
 
+import com.company.entity.camera.Camera;
 import com.company.entity.impl.object3d.Object3D;
-import com.company.environment.scene.Scene;
+import com.company.environment.scene.impl.Scene3D;
 
 import java.util.List;
 
-public class Wireframe implements  Runnable {
+public class Wireframe implements Runnable {
 
-    private Scene scene;
+    private Scene3D scene;
+    private Camera camera;
 
-    public Wireframe addScene(Scene scene) {
+    public Wireframe(Scene3D scene, Camera camera) {
         this.scene = scene;
-        return this;
+        this.camera = camera;
     }
 
     public void run() {
@@ -20,5 +22,10 @@ public class Wireframe implements  Runnable {
 
         List<Object3D> rotatedObjects = renderer.rotateStateless(objects);
         renderer.displaceObjectsStateful(objects);
+
+        renderer.rotateWithCameraStateful(objects, camera);
+        renderer.displaceObjectsWithCameraStateful(objects, camera);
+
+        objects.stream().forEach(System.out::println);
     }
 }

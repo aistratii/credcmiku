@@ -6,8 +6,8 @@ import static java.lang.Math.*;
 
 public class Coordinates3D implements Coordinates {
 
-    private float x, y, z;
-    private float angleX, angleY, angleZ;
+    private float x = 0f, y = 0f, z = 0f;
+    private float angleX = 0f, angleY = 0f, angleZ = 0f;
     private float   angleXCos, angleXSin,
                     angleYCos, angleYSin,
                     angleZCos, angleZSin;
@@ -19,6 +19,13 @@ public class Coordinates3D implements Coordinates {
         this.angleX = angleX;
         this.angleY = angleY;
         this.angleZ = angleZ;
+        return this;
+    }
+
+    public Coordinates3D addCoords(float x, float y, float z){
+        this.x = x;
+        this.y = y;
+        this.z = z;
         return this;
     }
 
@@ -138,5 +145,17 @@ public class Coordinates3D implements Coordinates {
             angleZCos = (float) toDegrees(cos(toRadians(angleZ)));
             return angleZCos;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Coordinates3D{" +
+                "x=" + x +
+                ", y=" + y +
+                ", z=" + z +
+                ", angleX=" + angleX +
+                ", angleY=" + angleY +
+                ", angleZ=" + angleZ +
+                '}';
     }
 }
