@@ -21,11 +21,12 @@ public class Wireframe implements Runnable {
         Renderer3D renderer = scene.getRenderer();
 
         List<Object3D> rotatedObjects = renderer.rotateStateless(objects);
-        renderer.displaceObjectsStateful(objects);
+        //renderer.displaceObjectsStateful(rotatedObjects);
 
-        renderer.rotateWithCameraStateful(objects, camera);
-        renderer.displaceObjectsWithCameraStateful(objects, camera);
+        //renderer.rotateWithCameraStateful(objects, camera);
+        //renderer.displaceObjectsWithCameraStateful(objects, camera);
 
         objects.stream().forEach(System.out::println);
+        rotatedObjects.stream().forEach(System.out::println);
     }
 }

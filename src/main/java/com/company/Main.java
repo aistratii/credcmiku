@@ -19,11 +19,11 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) throws FileNotFoundException {
-        Object3D object3D = loadObjectFromFile("C:\\Users\\aistratii\\Desktop\\test.obj"); //file url
+        Object3D object3D = loadObjectFromFile("C:\\Users\\aistratii\\Desktop\\test.obj");
         List<Object3D> objects = new ArrayList<>();
         objects.add(object3D);
 
-        //object3D.addCoord(new Coordinates3D().addAngleX(10));
+        object3D.setCoord(new Coordinates3D().addAngleZ(90));
 
         Renderer3D renderer3D = new Renderer3D();
         Scene3D scene3D = new Scene3D(objects, renderer3D);
@@ -34,7 +34,7 @@ public class Main {
 
     private static Object3D loadObjectFromFile(String fileName) throws FileNotFoundException {
         Scanner sc = new Scanner(new File(fileName));
-        Object3D obj = new Object3D().addCoord(new Coordinates3D());
+        Object3D obj = new Object3D().setCoord(new Coordinates3D());
 
         while(sc.hasNext()){
             String line = sc.nextLine();

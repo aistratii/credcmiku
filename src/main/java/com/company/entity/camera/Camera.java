@@ -16,7 +16,7 @@ public class Camera implements Entity {
     }
 
     @Override
-    public Camera addCoord(Coordinates coord) {
+    public Camera setCoord(Coordinates coord) {
         this.coord = (Coordinates3D) coord;
         return this;
     }

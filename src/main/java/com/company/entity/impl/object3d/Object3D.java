@@ -37,7 +37,7 @@ public class Object3D implements Entity{
     }
 
     @Override
-    public Object3D addCoord(Coordinates coord) {
+    public Object3D setCoord(Coordinates coord) {
         this.coord = (Coordinates3D) coord;
         return this;
     }

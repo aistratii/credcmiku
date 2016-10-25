@@ -92,7 +92,7 @@ public class Coordinates3D implements Coordinates {
             return angleXSin;
         else {
             isAngleXSinSet = true;
-            angleXSin = (float) toDegrees(sin(toRadians(angleX)));
+            angleXSin = (float) (sin(toRadians(angleX)));
             return angleXSin;
         }
     }
@@ -102,7 +102,7 @@ public class Coordinates3D implements Coordinates {
             return angleXCos;
         else {
             isAngleXCosSet = true;
-            angleXCos = (float) toDegrees(cos(toRadians(angleX)));
+            angleXCos = (float) (cos(toRadians(angleX)));
             return angleXCos;
         }
     }
@@ -112,7 +112,7 @@ public class Coordinates3D implements Coordinates {
             return angleYSin;
         else {
             isAngleYSinSet = true;
-            angleYSin = (float) toDegrees(sin(toRadians(angleY)));
+            angleYSin = (float) (sin(toRadians(angleY)));
             return angleYSin;
         }
     }
@@ -122,7 +122,7 @@ public class Coordinates3D implements Coordinates {
             return angleYCos;
         else {
             isAngleYCosSet = true;
-            angleYCos = (float) toDegrees(cos(toRadians(angleY)));
+            angleYCos = (float) (cos(toRadians(angleY)));
             return angleYCos;
         }
     }
@@ -132,7 +132,7 @@ public class Coordinates3D implements Coordinates {
             return angleZSin;
         else {
             isAngleZSinSet = true;
-            angleZSin = (float) toDegrees(sin(toRadians(angleZ)));
+            angleZSin = (float) (sin(toRadians(angleZ)));
             return angleZSin;
         }
     }
@@ -142,7 +142,7 @@ public class Coordinates3D implements Coordinates {
             return angleZCos;
         else {
             isAngleZCosSet = true;
-            angleZCos = (float) toDegrees(cos(toRadians(angleZ)));
+            angleZCos = (float) (cos(toRadians(angleZ)));
             return angleZCos;
         }
     }

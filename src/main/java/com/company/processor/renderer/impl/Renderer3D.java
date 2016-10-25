@@ -7,8 +7,6 @@ import com.company.entity.impl.object3d.Vertex3D;
 import com.company.processor.renderer.generic.Renderer;
 
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
@@ -22,16 +20,13 @@ public class Renderer3D extends Renderer {
         return rotateObjectStateless(objects);
     }
 
- /*   @Override
-     protected CompletableFuture<Float> rotateAroundOrigin(float x, float y, float cos, float sin) {
-
-        CompletableFuture<Float> cf1 = new CompletableFuture<>();
-        cf1.supplyAsync(() -> x*cos - y*sin, executorService);
-        return cf1;
-    }*/
-
-    protected float rotateAroundOrigin(float x, float y, float cos, float sin) {
-        return x*cos - y*sin;
+    protected float[] rotate(float x, float y, float sin, float cos) {
+        System.out.println(new StringBuilder()
+                .append(x).append(" ")
+                .append(y).append(" ")
+                .append(sin).append(" ")
+                .append(cos));
+        return new float[]{x*cos - y*sin, x*sin + y*cos};
     }
 
 
@@ -50,44 +45,38 @@ public class Renderer3D extends Renderer {
     }
 
     private List<Object3D> rotateObjectStateless(List<Object3D> objects){
-        List<Object3D> result =
-                objects.stream().map(object -> {
+        return objects.stream().map(object -> {
                     Coordinates3D coord = object.getCoord();
 
                     List<Vertex3D> vertexes = object.getVertexes().stream()
                             .map(vertex -> rotateVertexStateless(coord, vertex))
                             .collect(Collectors.toList());
 
-                    return new Object3D().setVertexes(vertexes).addCoord(coord);
+                    return new Object3D().setVertexes(vertexes).setCoord(coord);
                 }).collect(Collectors.toList());
-
-        return result;
     }
 
     private Vertex3D rotateVertexStateless(Coordinates3D coord, Vertex3D vertex) {
-        float newX =
-                rotateAroundOrigin( vertex.getX(), vertex.getY(), coord.getAngleXSin(), coord.getAngleXCos());
+        float   x = vertex.getX(),
+                y = vertex.getY(),
+                z = vertex.getZ();
 
-        float newY =
-                rotateAroundOrigin( vertex.getY(), vertex.getZ(), coord.getAngleYSin(), coord.getAngleYCos());
+        //y-z
+        float tmp[] = rotate( y, z, coord.getAngleXSin(), coord.getAngleXCos());
+        y = tmp[0];
+        z = tmp[1];
 
-        float newZ =
-                rotateAroundOrigin( vertex.getZ(), vertex.getX(), coord.getAngleZSin(), coord.getAngleZCos());
+        //y-z
+        tmp = rotate( y, x, coord.getAngleZSin(), coord.getAngleZCos());
+        y = tmp[0];
+        x = tmp[1];
 
+        //x-z
+        tmp = rotate( x, z, coord.getAngleYSin(), coord.getAngleYCos());
+        x = tmp[0];
+        z = tmp[1];
 
-        //float newX = 0f, newY = 0f, newZ = 0f;
-
-        /*try {
-            newX = xFuture.get();
-            newY = yFuture.get();
-            newZ = zFuture.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }*/
-
-        return new Vertex3D().addCoords(newX, newY, newZ);
+        return new Vertex3D().addCoords(x, y, z);
     }
 
     public void rotateWithCameraStateful(List<Object3D> objects, Camera camera) {
