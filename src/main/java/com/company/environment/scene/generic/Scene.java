@@ -10,6 +10,4 @@ import java.util.List;
 
 public interface Scene {
     public <T extends Entity> List<T> getObjects();
-
-    public <T extends Renderer> T getRenderer();
 }

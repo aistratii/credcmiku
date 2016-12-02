@@ -8,4 +8,9 @@ public abstract class Renderer {
    // protected abstract <T extends Entity> List<T> rotateStateless(List<T> objects);
     protected abstract List<Object3D> rotateStateless(List<Object3D> objects);
     protected abstract float[] rotate(float x, float y, float sin, float cos);
+
+
+    public enum RendererType{
+        WIREFRAME
+    }
 }

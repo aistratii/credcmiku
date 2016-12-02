@@ -4,6 +4,7 @@ import com.company.entity.camera.Camera;
 import com.company.entity.impl.object3d.Coordinates3D;
 import com.company.entity.impl.object3d.Object3D;
 import com.company.entity.impl.object3d.Vertex3D;
+import com.company.environment.scene.impl.Scene3D;
 import com.company.processor.renderer.generic.Renderer;
 
 import java.util.List;
@@ -14,6 +15,29 @@ import java.util.stream.Collectors;
 public class Renderer3D extends Renderer {
 
     private ExecutorService executorService = Executors.newFixedThreadPool(3);
+    private Scene3D scene;
+    private Camera camera;
+    private RendererType rendererType;
+
+    public Renderer3D(Scene3D scene, Camera camera, RendererType type) {
+        this.scene = scene;
+        this.camera = camera;
+        this.rendererType = type;
+    }
+
+    public void run() {
+        List<Object3D> objects = scene.getObjects();
+        Renderer3D renderer = this;
+
+        List<Object3D> rotatedObjects = renderer.rotateStateless(objects);
+        //renderer.displaceObjectsStateful(rotatedObjects);
+
+        //renderer.rotateWithCameraStateful(objects, camera);
+        //renderer.displaceObjectsWithCameraStateful(objects, camera);
+
+        objects.stream().forEach(System.out::println);
+        rotatedObjects.stream().forEach(System.out::println);
+    }
 
     @Override
     protected List<Object3D> rotateStateless(List<Object3D> objects){
