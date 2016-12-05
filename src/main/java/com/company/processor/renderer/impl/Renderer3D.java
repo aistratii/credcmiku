@@ -25,62 +25,67 @@ public class Renderer3D extends Renderer {
         this.rendererType = type;
     }
 
+    @Override
     public void run() {
         List<Object3D> objects = scene.getObjects();
-        Renderer3D renderer = this;
 
-        List<Object3D> rotatedObjects = renderer.rotateStateless(objects);
-        //renderer.displaceObjectsStateful(rotatedObjects);
+        objects = displaceObjects(objects);
+        objects = rotateObjects(objects);
+        objects = displaceObjectsWithCameraStateful(objects, camera);
+        objects = rotateWithCamera(objects, camera);
 
-        //renderer.rotateWithCameraStateful(objects, camera);
-        //renderer.displaceObjectsWithCameraStateful(objects, camera);
 
+        System.out.println("Printing original objects...");
+        scene.getObjects().stream().forEach(System.out::println);
+        System.out.println();
+
+        System.out.println("Printing rotated objects...");
         objects.stream().forEach(System.out::println);
-        rotatedObjects.stream().forEach(System.out::println);
+        System.out.println();
     }
 
     @Override
-    protected List<Object3D> rotateStateless(List<Object3D> objects){
-        return rotateObjectStateless(objects);
+    protected List<Object3D> rotateObjects(List<Object3D> objects){
+        return objects.stream().map(object -> {
+            Coordinates3D coord = object.getCoord();
+
+            List<Vertex3D> vertexes = object.getVertexes().stream()
+                    .map(vertex -> rotateVertex(coord, vertex))
+                    .collect(Collectors.toList());
+
+            return new Object3D(object).setVertexes(vertexes);
+        }).collect(Collectors.toList());
     }
 
     protected float[] rotate(float x, float y, float sin, float cos) {
-        System.out.println(new StringBuilder()
-                .append(x).append(" ")
-                .append(y).append(" ")
-                .append(sin).append(" ")
-                .append(cos));
+        /*System.out.println(new StringBuilder()
+                .append("x=")
+                .append(x).append(", y=")
+                .append(y).append(", sin=")
+                .append(sin).append(", cos=")
+                .append(cos));*/
         return new float[]{x*cos - y*sin, x*sin + y*cos};
     }
 
 
-    public void displaceObjectsStateful(List<Object3D> objects) {
-        objects.stream().forEach(object -> displaceVertexesStateful(object));
+    public List<Object3D> displaceObjects(List<Object3D> objects) {
+        return objects.stream().
+                map(object -> new Object3D(object)
+                        .setVertexes(displaceVertexes(object, object.getCoord())))
+                .collect(Collectors.toList());
     }
 
-    private void displaceVertexesStateful(Object3D object) {
-        Coordinates3D coord = object.getCoord();
+    private List<Vertex3D> displaceVertexes(Object3D object, Coordinates3D coord) {
 
-        object.getVertexes().stream().forEach(vertex -> {
-            vertex.setX(vertex.getX() + coord.getX());
-            vertex.setY(vertex.getY() + coord.getY());
-            vertex.setZ(vertex.getZ() + coord.getZ());
-        });
+        return object.getVertexes().stream().map(vertex ->
+            new Vertex3D(
+                    vertex.getX() + coord.getX(),
+                    vertex.getY() + coord.getY(),
+                    vertex.getZ() + coord.getZ())
+        ).collect(Collectors.toList());
     }
 
-    private List<Object3D> rotateObjectStateless(List<Object3D> objects){
-        return objects.stream().map(object -> {
-                    Coordinates3D coord = object.getCoord();
-
-                    List<Vertex3D> vertexes = object.getVertexes().stream()
-                            .map(vertex -> rotateVertexStateless(coord, vertex))
-                            .collect(Collectors.toList());
-
-                    return new Object3D().setVertexes(vertexes).setCoord(coord);
-                }).collect(Collectors.toList());
-    }
-
-    private Vertex3D rotateVertexStateless(Coordinates3D coord, Vertex3D vertex) {
+    private Vertex3D rotateVertex(Coordinates3D coord, Vertex3D vertex) {
         float   x = vertex.getX(),
                 y = vertex.getY(),
                 z = vertex.getZ();
@@ -100,31 +105,26 @@ public class Renderer3D extends Renderer {
         x = tmp[0];
         z = tmp[1];
 
-        return new Vertex3D().addCoords(x, y, z);
+        return new Vertex3D(x, y, z);
     }
 
-    public void rotateWithCameraStateful(List<Object3D> objects, Camera camera) {
-        objects.stream().forEach(object -> {
+    public List<Object3D> rotateWithCamera(List<Object3D> objects, Camera camera) {
+        return objects.stream().map(object -> {
             Coordinates3D coord = camera.getCoord();
-            if (coord == null) System.out.println("null");
 
             List<Vertex3D> vertexes = object.getVertexes().stream()
-                    .map(vertex -> rotateVertexStateless(coord, vertex))
+                    .map(vertex -> rotateVertex(coord, vertex))
                     .collect(Collectors.toList());
 
-            object.setVertexes(vertexes);
-        });
+            return object.setVertexes(vertexes);
+        }).collect(Collectors.toList());
+
     }
 
-    public void displaceObjectsWithCameraStateful(List<Object3D> objects, Camera camera) {
-        objects.stream().forEach(object -> {
-            object.getVertexes().stream().forEach(vertex -> {
-                Coordinates3D coord = camera.getCoord();
-
-                vertex.setX(vertex.getX() + coord.getX());
-                vertex.setY(vertex.getY() + coord.getY());
-                vertex.setZ(vertex.getZ() + coord.getZ());
-            });
-        });
+    public List<Object3D> displaceObjectsWithCameraStateful(List<Object3D> objects, Camera camera) {
+        return objects.stream().map(object ->
+            new Object3D(object).setVertexes(
+                    displaceVertexes(object, camera.getCoord())
+        )).collect(Collectors.toList());
     }
 }

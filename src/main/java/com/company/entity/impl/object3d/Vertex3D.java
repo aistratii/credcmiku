@@ -2,6 +2,7 @@ package com.company.entity.impl.object3d;
 
 import com.company.entity.generic.Coordinates;
 import com.company.entity.generic.Entity;
+import sun.security.provider.certpath.Vertex;
 
 public class Vertex3D{
     private float x, y, z;
@@ -11,6 +12,12 @@ public class Vertex3D{
         this.y = y;
         this.z = z;
         return this;
+    }
+
+    public Vertex3D(float x, float y, float z){
+        this.x = x;
+        this.y = y;
+        this.z = z;
     }
 
     public void setX(float x) {

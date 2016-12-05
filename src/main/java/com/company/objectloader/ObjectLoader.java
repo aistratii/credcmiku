@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class ObjectLoader{
 
@@ -18,19 +19,29 @@ public class ObjectLoader{
         while(sc.hasNext()){
             String line = sc.nextLine();
             if (line.charAt(0) == 'v'){
-                String [] vertexes = Arrays.copyOfRange(line.split(" "), 1, line.split(" ").length);
+                //Ver1
+                //String [] buffer = Arrays.copyOfRange(line.split(" "), 1, line.split(" ").length);
+
+                //Ver2
+                String buffer[] = Arrays
+                        .stream(line.split(" "))
+                        .filter(e ->{
+                            try {
+                                Float.parseFloat(e);
+                                return true;
+                            } catch(Exception ex){return false;}
+                        })
+                        .collect(Collectors.toList()).toArray(new String[0]);
 
                 Vertex3D vtx =
-                        new Vertex3D().addCoords(
-                                Float.parseFloat(vertexes[0]),
-                                Float.parseFloat(vertexes[1]),
-                                Float.parseFloat(vertexes[2])
+                        new Vertex3D(
+                                Float.parseFloat(buffer[0]),
+                                Float.parseFloat(buffer[1]),
+                                Float.parseFloat(buffer[2])
                         );
                 obj.addVertex(vtx);
             }
-
         }
-
         return obj;
     }
 }

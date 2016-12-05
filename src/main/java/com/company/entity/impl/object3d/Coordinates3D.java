@@ -22,6 +22,8 @@ public class Coordinates3D implements Coordinates {
         return this;
     }
 
+    public Coordinates3D(){};
+
     public Coordinates3D addCoords(float x, float y, float z){
         this.x = x;
         this.y = y;
@@ -29,7 +31,7 @@ public class Coordinates3D implements Coordinates {
         return this;
     }
 
-    public Coordinates3D addX(float x) {
+    public Coordinates3D setX(float x) {
         this.x = x;
         return this;
     }

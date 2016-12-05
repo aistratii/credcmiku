@@ -20,14 +20,17 @@ public class Main {
         List<Object3D> objects = new ArrayList<>();
         objects.add(object3D);
 
-        object3D.setCoord(new Coordinates3D().addAngleZ(90));
-
+        object3D.setCoord(new Coordinates3D().addAngleZ(90f));
+        object3D.getCoord().setX(10);
 
         Scene3D scene3D = new Scene3D(objects);
-        Renderer3D renderer3D = new Renderer3D(scene3D, new Camera(10, 10), Renderer.RendererType.WIREFRAME);
+        Renderer3D renderer3D =
+                new Renderer3D(scene3D, new Camera(0, 0).
+                        setCoord(new Coordinates3D()
+                                .addCoords(2, 0 ,0)
+                                .addAngleX(90f)),
+                        Renderer.RendererType.WIREFRAME);
 
         renderer3D.run();
     }
-
-
 }

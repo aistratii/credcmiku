@@ -6,6 +6,7 @@ import com.company.environment.scene.generic.Scene;
 import com.company.processor.renderer.generic.Renderer;
 import com.company.processor.renderer.impl.Renderer3D;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Scene3D implements Scene {
@@ -13,6 +14,11 @@ public class Scene3D implements Scene {
 
     public Scene3D(List<Object3D> objects) {
         this.objects = objects;
+    }
+
+    public Scene3D(){
+        List<Object3D> list = new ArrayList<>();
+        this.objects = list;
     }
 
     @Override

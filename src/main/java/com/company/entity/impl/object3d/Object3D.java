@@ -17,6 +17,11 @@ public class Object3D implements Entity{
         vertexes = new ArrayList<>();
     }
 
+    public Object3D(Object3D that){
+        this.coord = that.getCoord();
+        this.vertexes = that.getVertexes();
+    }
+
     public void addVertex(Vertex3D vtx){
         vertexes.add(vtx);
     }
