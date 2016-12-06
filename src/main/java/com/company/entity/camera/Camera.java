@@ -7,12 +7,14 @@ import com.company.entity.impl.object3d.Coordinates3D;
 public class Camera implements Entity {
 
     private Coordinates3D coord;
+    private int focus;
     private int width, height;
 
     public Camera(){
         coord = new Coordinates3D();
         width = 10;
         height = 10;
+        focus = 10;
     }
 
     @Override
@@ -26,10 +28,15 @@ public class Camera implements Entity {
         return coord;
     }
 
-    public Camera(int width, int height) {
+    public Camera(int width, int height, int focus) {
         coord = new Coordinates3D();
         this.width = width;
         this.height = height;
+        this.focus = focus;
+    }
+
+    public int getFocus() {
+        return focus;
     }
 
     public int getWidth() {

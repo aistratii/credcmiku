@@ -1,10 +1,7 @@
 package com.company.environment.scene.impl;
 
-import com.company.entity.generic.Entity;
 import com.company.entity.impl.object3d.Object3D;
 import com.company.environment.scene.generic.Scene;
-import com.company.processor.renderer.generic.Renderer;
-import com.company.processor.renderer.impl.Renderer3D;
 
 import java.util.ArrayList;
 import java.util.List;
