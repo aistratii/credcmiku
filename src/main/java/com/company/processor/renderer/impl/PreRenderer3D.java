@@ -1,13 +1,13 @@
 package com.company.processor.renderer.impl;
 
 import com.company.entity.camera.Camera;
-import com.company.entity.impl.object3d.Coordinates3D;
-import com.company.entity.impl.object3d.Object3D;
-import com.company.entity.impl.object3d.Vertex3D;
+import com.company.entity.generic.Coordinates;
+import com.company.entity.impl.object3d.*;
 import com.company.environment.scene.impl.Scene3D;
 import com.company.processor.renderer.RendererRegister;
 import com.company.processor.renderer.generic.PreRenderer;
 import com.company.processor.renderer.generic.Renderer;
+import jdk.nashorn.internal.objects.annotations.Function;
 
 import javax.imageio.ImageIO;
 import java.io.File;
@@ -55,7 +55,23 @@ public class PreRenderer3D extends PreRenderer {
     private void repositionObjects(){
         List<Object3D> objects = scene.getObjects();
 
-        objects = displaceObjects(objects);
+        objects.stream().map(object ->
+            new Object3D(object).setFaces(
+                    object.getFaces().stream().map(face -> new Face3D(
+                            face.getEdges().stream().map(edge -> new Edge3D(
+                                    new Transformer(edge.getV1(), object.getCoord(), camera)
+                                            .rotateVertexToGlobal().displaceVertexToGlobal().rotateVertexToCamera().displaceVertexToCamera().andGet(),
+                                    new Transformer(edge.getV2(), object.getCoord(), camera)
+                                            .rotateVertexToGlobal().displaceVertexToGlobal().rotateVertexToCamera().displaceVertexToCamera().andGet()
+                            )).collect(Collectors.toList())
+                    )).collect(Collectors.toList())
+            )
+        ).collect(Collectors.toList());
+
+        bufferedObjects = objects;
+        renderer.setObjects(bufferedObjects);
+
+        /*objects = displaceObjects(objects);
         objects = rotateObjects(objects);
         objects = displaceObjectsWithCameraStateful(objects, camera);
         objects = rotateWithCamera(objects, camera);
@@ -69,48 +85,58 @@ public class PreRenderer3D extends PreRenderer {
 
         System.out.println("Printing rotated objects...");
         objects.stream().forEach(System.out::println);
-        System.out.println();
+        System.out.println();*/
+    }
+}
+
+class Transformer{
+    private Vertex3D vtx;
+    private Coordinates3D objectCoord;
+    private Camera camera;
+
+    Transformer(Vertex3D vtx, Coordinates3D coordinates3D, Camera camera){
+        this.vtx = vtx;
+        this.objectCoord = coordinates3D;
+        this.camera = camera;
     }
 
-    @Override
-    protected List<Object3D> rotateObjects(List<Object3D> objects){
-        return objects.stream().map(object -> {
-            Coordinates3D coord = object.getCoord();
-
-            List<Vertex3D> vertexes = object.getVertexes().stream()
-                    .map(vertex -> rotateVertex(coord, vertex))
-                    .collect(Collectors.toList());
-
-            return new Object3D(object).setVertexes(vertexes);
-        }).collect(Collectors.toList());
+    Vertex3D andGet(){
+        return vtx;
     }
 
-    @Override
-    protected float[] rotate(float x, float y, float sin, float cos) {
-        /*System.out.println(new StringBuilder()
+    Transformer rotateVertexToGlobal(){
+        this.vtx = rotateVertex(objectCoord, vtx);
+        return this;
+    }
+
+    Transformer displaceVertexToGlobal(){
+        vtx.setX(vtx.getX() + objectCoord.getX());
+        vtx.setY(vtx.getY() + objectCoord.getY());
+        vtx.setZ(vtx.getZ() + objectCoord.getZ());
+        return this;
+    }
+
+    Transformer rotateVertexToCamera(){
+        vtx = rotateVertex(camera.getCoord(), vtx);
+        return this;
+    }
+
+    Transformer displaceVertexToCamera(){
+        vtx.setX(vtx.getX() + camera.getCoord().getX());
+        vtx.setY(vtx.getY() + camera.getCoord().getY());
+        vtx.setZ(vtx.getZ() + camera.getCoord().getZ());
+        return this;
+    }
+
+
+    private float[] rotate(float x, float y, float sin, float cos) {
+        System.out.println(new StringBuilder()
                 .append("x=")
                 .append(x).append(", y=")
                 .append(y).append(", sin=")
                 .append(sin).append(", cos=")
-                .append(cos));*/
+                .append(cos));
         return new float[]{x*cos - y*sin, x*sin + y*cos};
-    }
-
-    private List<Object3D> displaceObjects(List<Object3D> objects) {
-        return objects.stream().
-                map(object -> new Object3D(object)
-                        .setVertexes(displaceVertexes(object, object.getCoord())))
-                .collect(Collectors.toList());
-    }
-
-    private List<Vertex3D> displaceVertexes(Object3D object, Coordinates3D coord) {
-
-        return object.getVertexes().stream().map(vertex ->
-            new Vertex3D(
-                    vertex.getX() + coord.getX(),
-                    vertex.getY() + coord.getY(),
-                    vertex.getZ() + coord.getZ())
-        ).collect(Collectors.toList());
     }
 
     private Vertex3D rotateVertex(Coordinates3D coord, Vertex3D vertex) {
@@ -134,25 +160,5 @@ public class PreRenderer3D extends PreRenderer {
         z = tmp[1];
 
         return new Vertex3D(x, y, z);
-    }
-
-    private List<Object3D> rotateWithCamera(List<Object3D> objects, Camera camera) {
-        return objects.stream().map(object -> {
-            Coordinates3D coord = camera.getCoord();
-
-            List<Vertex3D> vertexes = object.getVertexes().stream()
-                    .map(vertex -> rotateVertex(coord, vertex))
-                    .collect(Collectors.toList());
-
-            return object.setVertexes(vertexes);
-        }).collect(Collectors.toList());
-
-    }
-
-    private List<Object3D> displaceObjectsWithCameraStateful(List<Object3D> objects, Camera camera) {
-        return objects.stream().map(object ->
-            new Object3D(object).setVertexes(
-                    displaceVertexes(object, camera.getCoord())
-        )).collect(Collectors.toList());
     }
 }

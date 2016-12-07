@@ -45,9 +45,9 @@ public class Renderer3DWireframe implements Renderer{
     }
 
     private List<Vertex2D> getProjectedPoints(){
-        List<Vertex2D> result = new ArrayList<>();
+        //List<Vertex2D> result = new ArrayList<>();
 
-        objects.stream()
+        /*objects.stream()
                 .map(object -> object.getVertexes())
                 .forEach(list ->
                     list.forEach(vertex3D ->{
@@ -59,9 +59,25 @@ public class Renderer3DWireframe implements Renderer{
 
                         result.add(new Vertex2D(newX, newY));
                     })
-                );
+                );*/
 
-        return result;
+        List<Vertex2D> newVertexes = new ArrayList<>();
+
+        objects.stream().forEach(object -> object.getFaces().forEach(face -> face.getEdges().forEach(edge -> {
+            // z/x = z1/x1 ~> z/x = focus/x1
+            // ^ => x1 = focus*x/z
+
+            float newX1 = camera.getFocus()*edge.getV1().getX()/edge.getV1().getZ();
+            float newY1 = camera.getFocus()*edge.getV1().getY()/edge.getV1().getZ();
+
+            float newX2 = camera.getFocus()*edge.getV2().getX()/edge.getV2().getZ();
+            float newY2 = camera.getFocus()*edge.getV2().getY()/edge.getV2().getZ();
+
+            newVertexes.add(new Vertex2D(newX1, newY1));
+            newVertexes.add(new Vertex2D(newX2, newY2));
+        })));
+
+        return newVertexes;
     }
 
     @Override
