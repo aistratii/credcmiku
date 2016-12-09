@@ -7,7 +7,7 @@ import com.company.entity.impl.object3d.Coordinates3D;
 public class Camera implements Entity {
 
     private Coordinates3D coord;
-    private int focus;
+    private float focus;
     private int width, height;
 
     public Camera(){
@@ -28,14 +28,14 @@ public class Camera implements Entity {
         return coord;
     }
 
-    public Camera(int width, int height, int focus) {
+    public Camera(int width, int height, float focus) {
         coord = new Coordinates3D();
         this.width = width;
         this.height = height;
         this.focus = focus;
     }
 
-    public int getFocus() {
+    public float getFocus() {
         return focus;
     }
 

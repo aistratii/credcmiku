@@ -7,6 +7,12 @@ import sun.security.provider.certpath.Vertex;
 public class Vertex3D{
     private float x, y, z;
 
+    public Vertex3D(Vertex3D that) {
+        this.x = that.getX();
+        this.y = that.getY();
+        this.z = that.getZ();
+    }
+
     public Vertex3D addCoords(float x, float y, float z) {
         this.x = x;
         this.y = y;

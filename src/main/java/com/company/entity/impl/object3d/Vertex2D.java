@@ -15,4 +15,12 @@ public class Vertex2D{
     public float getY() {
         return y;
     }
+
+    @Override
+    public String toString() {
+        return "Vertex2D{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
+    }
 }

@@ -2,9 +2,7 @@ package com.company.processor.renderer.impl;
 
 import com.company.entity.camera.Camera;
 import com.company.entity.generic.Entity;
-import com.company.entity.impl.object3d.Object3D;
-import com.company.entity.impl.object3d.Vertex2D;
-import com.company.entity.impl.object3d.Vertex3D;
+import com.company.entity.impl.object3d.*;
 import com.company.processor.renderer.generic.Renderer;
 
 import java.awt.Color;
@@ -27,57 +25,73 @@ public class Renderer3DWireframe implements Renderer{
 
     @Override
     public void run() {
-        List<Vertex2D> projectedPoints = getProjectedPoints();
+        List<Edge2D> projectedPoints = getProjectedPoints();
         renderedImage = drawOnFrame(projectedPoints);
     }
 
-    private BufferedImage drawOnFrame(List<Vertex2D> projectedPoints) {
+    private BufferedImage drawOnFrame(List<Edge2D> projectedPoints) {
         BufferedImage frame = new BufferedImage(camera.getWidth(), camera.getHeight(), BufferedImage.TYPE_INT_RGB);
 
-        projectedPoints.forEach(vertex ->{
-            if (abs(vertex.getX()) <= camera.getWidth() && abs(vertex.getY()) <= camera.getHeight())
-                frame.setRGB((int)(vertex.getX() + camera.getHeight()/2),
-                        (int)(camera.getHeight()/2 - vertex.getY()),
-                        new Color(150, 150, 150).getRGB());
+        projectedPoints.forEach(edge ->{
+
+            //drawline
+            frame.getGraphics().drawLine(
+                    (int)edge.getVtx1().getX() + camera.getHeight()/2, camera.getHeight()/2 - (int)edge.getVtx1().getY(),
+                    (int)edge.getVtx2().getX() + camera.getHeight()/2, camera.getHeight()/2 - (int)edge.getVtx2().getY());
+
+            //draw vertexes
+            Vertex2D vtx1 = edge.getVtx1();
+
+            if (abs(vtx1.getX()) <= camera.getWidth() && abs(vtx1.getY()) <= camera.getHeight())
+                frame.getGraphics().drawOval(
+                        (int)(vtx1.getX() + camera.getHeight()/2),
+                        (int)(camera.getHeight()/2 - vtx1.getY()),
+                        4,
+                        4);
+
+            Vertex2D vtx2 = edge.getVtx2();
+
+            if (abs(vtx2.getX()) <= camera.getWidth() && abs(vtx2.getY()) <= camera.getHeight())
+                frame.getGraphics().drawOval(
+                        (int)(vtx2.getX() + camera.getHeight()/2),
+                        (int)(camera.getHeight()/2 - vtx2.getY()),
+                        4,
+                        4);
+
+            //System.out.println(edge);
         });
 
+        //objects.stream().forEach(System.out::println);
         return frame;
     }
 
-    private List<Vertex2D> getProjectedPoints(){
-        //List<Vertex2D> result = new ArrayList<>();
+    private List<Edge2D> getProjectedPoints(){
 
-        /*objects.stream()
-                .map(object -> object.getVertexes())
-                .forEach(list ->
-                    list.forEach(vertex3D ->{
-                        // z/x = z1/x1 ~> z/x = focus/x1
-                        // ^ => x1 = focus*x/z
-
-                        float newX = camera.getFocus()*vertex3D.getX()/vertex3D.getZ();
-                        float newY = camera.getFocus()*vertex3D.getY()/vertex3D.getZ();
-
-                        result.add(new Vertex2D(newX, newY));
-                    })
-                );*/
-
-        List<Vertex2D> newVertexes = new ArrayList<>();
+        List<Edge2D> newEdges = new ArrayList<>();
 
         objects.stream().forEach(object -> object.getFaces().forEach(face -> face.getEdges().forEach(edge -> {
             // z/x = z1/x1 ~> z/x = focus/x1
             // ^ => x1 = focus*x/z
 
-            float newX1 = camera.getFocus()*edge.getV1().getX()/edge.getV1().getZ();
-            float newY1 = camera.getFocus()*edge.getV1().getY()/edge.getV1().getZ();
+            float newX1 = safelyDivide(camera.getFocus()*edge.getV1().getX(), edge.getV1().getZ());
+            float newY1 = safelyDivide(camera.getFocus()*edge.getV1().getY(), edge.getV1().getZ());
 
-            float newX2 = camera.getFocus()*edge.getV2().getX()/edge.getV2().getZ();
-            float newY2 = camera.getFocus()*edge.getV2().getY()/edge.getV2().getZ();
+            float newX2 = safelyDivide(camera.getFocus()*edge.getV2().getX(), edge.getV2().getZ());
+            float newY2 = safelyDivide(camera.getFocus()*edge.getV2().getY(),edge.getV2().getZ());
 
-            newVertexes.add(new Vertex2D(newX1, newY1));
-            newVertexes.add(new Vertex2D(newX2, newY2));
+            newEdges.add(new Edge2D(new Vertex2D(newX1, newY1), new Vertex2D(newX2, newY2)));
         })));
 
-        return newVertexes;
+        return newEdges;
+    }
+
+    private float safelyDivide(float v1, float v2) {
+        //System.out.println(v1 + " " + v2);
+        if (v1 == 0 && v2== 0)
+            return 0f;
+        else if (v2 == 0)
+            return 0f;
+        else return v1/v2;
     }
 
     @Override

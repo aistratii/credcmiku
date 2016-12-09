@@ -48,4 +48,12 @@ public class Object3D implements Entity{
         this.coord = (Coordinates3D) coord;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "Object3D{" +
+                "coord=" + coord +
+                ", faces=" + faces +
+                '}';
+    }
 }

@@ -25,4 +25,11 @@ public class Face3D {
     public void addEdge(Vertex3D vertex1, Vertex3D vertex2){
         edges.add(new Edge3D(vertex1, vertex2));
     }
+
+    @Override
+    public String toString() {
+        return "Face3D{" +
+                "edges=" + edges +
+                '}';
+    }
 }

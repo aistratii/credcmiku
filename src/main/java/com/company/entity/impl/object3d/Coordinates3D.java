@@ -36,29 +36,29 @@ public class Coordinates3D implements Coordinates {
         return this;
     }
 
-    public Coordinates3D addY(float y) {
+    public Coordinates3D setY(float y) {
         this.y = y;
         return this;
     }
 
-    public Coordinates3D addZ(float z) {
+    public Coordinates3D setZ(float z) {
         this.z = z;
         return this;
     }
 
-    public Coordinates3D addAngleX(float angleX) {
+    public Coordinates3D setAngleX(float angleX) {
         this.angleX = angleX;
         isAngleXSinSet = isAngleXCosSet = false;
         return this;
     }
 
-    public Coordinates3D addAngleY(float angleY) {
+    public Coordinates3D setAngleY(float angleY) {
         this.angleY = angleY;
         isAngleYSinSet = isAngleYCosSet = false;
         return this;
     }
 
-    public Coordinates3D addAngleZ(float angleZ) {
+    public Coordinates3D setAngleZ(float angleZ) {
         this.angleZ = angleZ;
         isAngleZSinSet = isAngleZCosSet = false;
         return this;

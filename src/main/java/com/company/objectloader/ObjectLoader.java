@@ -49,9 +49,12 @@ public class ObjectLoader{
                     face.addEdge(new Edge3D(vertex3DList.get(rowIndexes.get(i) -1), vertex3DList.get(rowIndexes.get(i +1) -1)));
                 }
 
+                face.addEdge(new Edge3D(vertex3DList.get(0), vertex3DList.get(vertex3DList.size() -1)));
+
                 obj.addFace(face);
             }
         }
+
         return obj;
     }
 }

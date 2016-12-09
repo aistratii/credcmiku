@@ -1,32 +1,35 @@
 package com.company.visual.window;
 
-import com.company.processor.renderer.generic.PreRenderer;
+import com.company.processor.renderer.generic.RenderInterface;
 
 import javax.swing.*;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 public class Viewport extends JPanel {
-    private PreRenderer preRenderer;
-    private BufferedImage bufferedImage;
+    private RenderInterface renderInterface;
 
-    public Viewport(){
-        bufferedImage = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
-    }
+    public Viewport(){}
 
-    public <T extends PreRenderer> Viewport setPreRenderer(T preRenderer){
-        this.preRenderer = preRenderer;
+    public <T extends RenderInterface> Viewport setRenderInterface(T renderInterface){
+        this.renderInterface = renderInterface;
         return this;
     }
 
-    public Viewport(PreRenderer preRenderer){
-        bufferedImage = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
-        this.preRenderer = preRenderer;
+    public Viewport(RenderInterface renderInterface){
+        this.renderInterface = renderInterface;
+    }
+
+    public void update(){
+        renderInterface.run();
+        repaint();
+        paintComponent(this.getGraphics());
     }
 
     @Override
     public void paintComponent(Graphics g){
+        renderInterface.run();
+        BufferedImage bufferedImage = renderInterface.getRenderer().getRenderedImage();
         g.drawImage(bufferedImage, 0, 0, getWidth(), getHeight(), null);
-        preRenderer.run();
     }
 }

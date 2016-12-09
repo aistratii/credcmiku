@@ -15,4 +15,12 @@ public class Edge3D {
     public Vertex3D getV2() {
         return v2;
     }
+
+    @Override
+    public String toString() {
+        return "Edge3D{" +
+                "v1=" + v1 +
+                ", v2=" + v2 +
+                '}';
+    }
 }
