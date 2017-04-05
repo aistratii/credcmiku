@@ -17,8 +17,9 @@ import static java.lang.Math.abs;
 
 public class Renderer3DWireframe implements Renderer{
 
-    private int lineWidth = 1;
-    private Color lineColor = new Color(0,0,0);
+    private int pointSize = 4;
+    private Color lineColor = new Color(255,255,255);
+    private Color pointColor = new Color(100,100,200);
     private Camera camera;
     private List<Object3D> objects;
     BufferedImage renderedImage;
@@ -35,33 +36,32 @@ public class Renderer3DWireframe implements Renderer{
         projectedPoints.forEach(edge ->{
 
             //drawline
+            frame.getGraphics().setColor(lineColor);
             frame.getGraphics().drawLine(
                     (int)edge.getVtx1().getX() + camera.getHeight()/2, camera.getHeight()/2 - (int)edge.getVtx1().getY(),
                     (int)edge.getVtx2().getX() + camera.getHeight()/2, camera.getHeight()/2 - (int)edge.getVtx2().getY());
 
             //draw vertexes
+            frame.getGraphics().setColor(pointColor);
             Vertex2D vtx1 = edge.getVtx1();
 
             if (abs(vtx1.getX()) <= camera.getWidth() && abs(vtx1.getY()) <= camera.getHeight())
                 frame.getGraphics().drawOval(
-                        (int)(vtx1.getX() + camera.getHeight()/2),
-                        (int)(camera.getHeight()/2 - vtx1.getY()),
-                        4,
-                        4);
+                        (int)(vtx1.getX() + camera.getHeight()/2) - pointSize/2,
+                        (int)(camera.getHeight()/2 - vtx1.getY()) - pointSize/2,
+                        pointSize,
+                        pointSize);
 
             Vertex2D vtx2 = edge.getVtx2();
 
             if (abs(vtx2.getX()) <= camera.getWidth() && abs(vtx2.getY()) <= camera.getHeight())
                 frame.getGraphics().drawOval(
-                        (int)(vtx2.getX() + camera.getHeight()/2),
-                        (int)(camera.getHeight()/2 - vtx2.getY()),
-                        4,
-                        4);
-
-            //System.out.println(edge);
+                        (int)(vtx2.getX() + camera.getHeight()/2) - pointSize/2,
+                        (int)(camera.getHeight()/2 - vtx2.getY()) - pointSize/2,
+                        pointSize,
+                        pointSize);
         });
 
-        //objects.stream().forEach(System.out::println);
         return frame;
     }
 
@@ -86,7 +86,6 @@ public class Renderer3DWireframe implements Renderer{
     }
 
     private float safelyDivide(float v1, float v2) {
-        //System.out.println(v1 + " " + v2);
         if (v1 == 0 && v2== 0)
             return 0f;
         else if (v2 == 0)
@@ -112,11 +111,15 @@ public class Renderer3DWireframe implements Renderer{
                 .collect(Collectors.toList());
     }
 
-    public void setLineWidth(int lineWidth) {
-        this.lineWidth = lineWidth;
+    public void setPointSizeh(int pointSize) {
+        this.pointSize = pointSize;
     }
 
     public void setLineColor(Color lineColor) {
         this.lineColor = lineColor;
+    }
+
+    public void setPointColor(Color pointColor) {
+        this.pointColor = pointColor;
     }
 }

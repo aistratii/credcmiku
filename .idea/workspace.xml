@@ -2,36 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="34197154-36b0-4667-83d4-00f2ffef69af" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/company/entity/impl/object3d/Edge2D.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/company/Main.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/company/processor/renderer/generic/PreRenderer.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/company/processor/renderer/impl/PreRenderer3D.class" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/company/processor/renderer/generic/PreRenderer.java" afterPath="$PROJECT_DIR$/src/main/java/com/company/processor/renderer/generic/RenderInterface.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/company/processor/renderer/impl/PreRenderer3D.java" afterPath="$PROJECT_DIR$/src/main/java/com/company/processor/renderer/impl/RenderInterface3D.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/company/entity/camera/Camera.class" afterPath="$PROJECT_DIR$/target/classes/com/company/entity/camera/Camera.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/company/entity/impl/object3d/Coordinates3D.class" afterPath="$PROJECT_DIR$/target/classes/com/company/entity/impl/object3d/Coordinates3D.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/company/entity/impl/object3d/Edge3D.class" afterPath="$PROJECT_DIR$/target/classes/com/company/entity/impl/object3d/Edge3D.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/company/entity/impl/object3d/Face3D.class" afterPath="$PROJECT_DIR$/target/classes/com/company/entity/impl/object3d/Face3D.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/company/entity/impl/object3d/Object3D.class" afterPath="$PROJECT_DIR$/target/classes/com/company/entity/impl/object3d/Object3D.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/company/entity/impl/object3d/Vertex2D.class" afterPath="$PROJECT_DIR$/target/classes/com/company/entity/impl/object3d/Vertex2D.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/company/entity/impl/object3d/Vertex3D.class" afterPath="$PROJECT_DIR$/target/classes/com/company/entity/impl/object3d/Vertex3D.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/company/objectloader/ObjectLoader.class" afterPath="$PROJECT_DIR$/target/classes/com/company/objectloader/ObjectLoader.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/company/processor/renderer/impl/Renderer3DWireframe.class" afterPath="$PROJECT_DIR$/target/classes/com/company/processor/renderer/impl/Renderer3DWireframe.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/company/processor/renderer/generic/RenderInterface.class" afterPath="$PROJECT_DIR$/target/classes/com/company/processor/renderer/generic/RenderInterface.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/company/processor/renderer/impl/RenderInterface3D.class" afterPath="$PROJECT_DIR$/target/classes/com/company/processor/renderer/impl/RenderInterface3D.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/company/processor/renderer/impl/Transformer.class" afterPath="$PROJECT_DIR$/target/classes/com/company/processor/renderer/impl/Transformer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/company/visual/window/Viewport.class" afterPath="$PROJECT_DIR$/target/classes/com/company/visual/window/Viewport.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/credcmiku-1.0-SNAPSHOT.jar" afterPath="$PROJECT_DIR$/target/credcmiku-1.0-SNAPSHOT.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/company/Main.java" afterPath="$PROJECT_DIR$/src/main/java/com/company/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/company/entity/camera/Camera.java" afterPath="$PROJECT_DIR$/src/main/java/com/company/entity/camera/Camera.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/company/entity/impl/object3d/Coordinates3D.java" afterPath="$PROJECT_DIR$/src/main/java/com/company/entity/impl/object3d/Coordinates3D.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/company/entity/impl/object3d/Edge3D.java" afterPath="$PROJECT_DIR$/src/main/java/com/company/entity/impl/object3d/Edge3D.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/company/entity/impl/object3d/Face3D.java" afterPath="$PROJECT_DIR$/src/main/java/com/company/entity/impl/object3d/Face3D.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/company/entity/impl/object3d/Object3D.java" afterPath="$PROJECT_DIR$/src/main/java/com/company/entity/impl/object3d/Object3D.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/company/entity/impl/object3d/Vertex2D.java" afterPath="$PROJECT_DIR$/src/main/java/com/company/entity/impl/object3d/Vertex2D.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/company/entity/impl/object3d/Vertex3D.java" afterPath="$PROJECT_DIR$/src/main/java/com/company/entity/impl/object3d/Vertex3D.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/company/objectloader/ObjectLoader.java" afterPath="$PROJECT_DIR$/src/main/java/com/company/objectloader/ObjectLoader.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/company/processor/renderer/generic/RenderInterface.java" afterPath="$PROJECT_DIR$/src/main/java/com/company/processor/renderer/generic/RenderInterface.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/company/processor/renderer/impl/RenderInterface3D.java" afterPath="$PROJECT_DIR$/src/main/java/com/company/processor/renderer/impl/RenderInterface3D.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/company/processor/renderer/impl/Renderer3DWireframe.java" afterPath="$PROJECT_DIR$/src/main/java/com/company/processor/renderer/impl/Renderer3DWireframe.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/company/visual/window/MainWindow.java" afterPath="$PROJECT_DIR$/src/main/java/com/company/visual/window/MainWindow.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/company/visual/window/Viewport.java" afterPath="$PROJECT_DIR$/src/main/java/com/company/visual/window/Viewport.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" />
     </list>
     <ignored path="credcmiku.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -54,33 +38,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/company/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="550">
-              <caret line="50" column="17" selection-start-line="50" selection-start-column="17" selection-end-line="50" selection-end-column="17" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Viewport.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/company/visual/window/Viewport.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="30" column="25" selection-start-line="30" selection-start-column="25" selection-end-line="30" selection-end-column="25" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Renderer3DWireframe.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Renderer3DWireframe.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/company/processor/renderer/impl/Renderer3DWireframe.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="104">
-              <caret line="91" column="25" selection-start-line="91" selection-start-column="25" selection-end-line="91" selection-end-column="25" />
+            <state relative-caret-position="-88">
+              <caret line="23" column="34" selection-start-line="23" selection-start-column="34" selection-end-line="23" selection-end-column="34" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#setObjects#0;class#Renderer3DWireframe#0" expanded="false" />
@@ -146,15 +108,15 @@
         <option value="$PROJECT_DIR$/src/main/java/com/company/entity/impl/object3d/Edge2D.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/company/entity/impl/object3d/Vertex2D.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/company/entity/impl/object3d/Vertex3D.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/company/objectloader/ObjectLoader.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/company/processor/renderer/impl/PreRenderer3D.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/company/entity/impl/object3d/Coordinates3D.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/company/visual/window/MainWindow.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/company/processor/renderer/generic/RenderInterface.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/company/visual/window/Viewport.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/company/processor/renderer/impl/Renderer3DWireframe.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/company/processor/renderer/generic/RenderInterface.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/company/objectloader/ObjectLoader.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/company/processor/renderer/impl/RenderInterface3D.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/company/Main.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/company/processor/renderer/impl/Renderer3DWireframe.java" />
       </list>
     </option>
   </component>
@@ -1123,20 +1085,20 @@
       <updated>1475763149792</updated>
       <workItem from="1475763153284" duration="23198000" />
       <workItem from="1477406827000" duration="4213000" />
-      <workItem from="1480669651730" duration="64397000" />
+      <workItem from="1480669651730" duration="67583000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="91808000" />
+    <option name="totallyTimeSpent" value="94994000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1050" extended-state="6" />
-    <editor active="true" />
+    <frame x="-9" y="-9" width="1938" height="1050" extended-state="7" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22963801" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22963801" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Gerrit" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1144,7 +1106,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32983378" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21153846" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32749563" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32692307" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2473176" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -1203,7 +1165,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="14" />
+      <option name="time" value="16" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1228,6 +1190,9 @@
           <caret line="22" column="22" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#RenderInterface3D#1;class#RenderInterface3D#0" expanded="false" />
+            <element signature="e#2000#2001#0" expanded="true" />
+            <element signature="e#2050#2051#0" expanded="true" />
             <element signature="class#Transformer#0" expanded="false" />
             <element signature="method#rotateVertex#0;class#Transformer#0" expanded="false" />
           </folding>
@@ -1286,6 +1251,9 @@
           <caret line="95" column="23" selection-start-line="95" selection-start-column="23" selection-end-line="95" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#RenderInterface3D#1;class#RenderInterface3D#0" expanded="false" />
+            <element signature="e#2000#2001#0" expanded="true" />
+            <element signature="e#2050#2051#0" expanded="true" />
             <element signature="class#Transformer#0" expanded="false" />
             <element signature="method#rotateVertex#0;class#Transformer#0" expanded="false" />
           </folding>
@@ -1549,54 +1517,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/company/processor/renderer/generic/RenderInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="9" column="25" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/company/processor/renderer/generic/Renderer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="11" column="18" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/company/objectloader/ObjectLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="747">
-          <caret line="51" column="103" selection-start-line="51" selection-start-column="103" selection-end-line="51" selection-end-column="103" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/company/visual/window/MainWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="21" column="41" selection-start-line="21" selection-start-column="41" selection-end-line="21" selection-end-column="41" />
-          <folding>
-            <element signature="method#MainWindow#0;class#MainWindow#0" expanded="false" />
-            <element signature="method#addViewport#0;class#MainWindow#0" expanded="false" />
-            <element signature="method#setLayout#0;class#MainWindow#0" expanded="false" />
-            <element signature="class#Layouts#0;class#MainWindow#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/company/processor/renderer/impl/Renderer3DWireframe.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="104">
-          <caret line="91" column="25" selection-start-line="91" selection-start-column="25" selection-end-line="91" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#setObjects#0;class#Renderer3DWireframe#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/company/visual/window/Viewport.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
@@ -1605,24 +1525,104 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/company/processor/renderer/impl/RenderInterface3D.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/company/visual/window/MainWindow.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
-          <caret line="55" column="10" selection-start-line="55" selection-start-column="8" selection-end-line="59" selection-end-column="11" />
+        <state relative-caret-position="219">
+          <caret line="16" column="10" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="10" />
+          <folding>
+            <element signature="method#MainWindow#0;class#MainWindow#0" expanded="false" />
+            <element signature="method#setLayout#0;class#MainWindow#0" expanded="false" />
+            <element signature="class#Layouts#0;class#MainWindow#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/company/processor/renderer/generic/Renderer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="13" column="28" selection-start-line="13" selection-start-column="28" selection-end-line="13" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/company/processor/renderer/generic/RenderInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="14" column="61" selection-start-line="14" selection-start-column="61" selection-end-line="14" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/company/objectloader/ObjectLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="14" column="86" selection-start-line="14" selection-start-column="86" selection-end-line="14" selection-end-column="86" />
+          <folding>
+            <element signature="method#fromFileName#0;class#ObjectLoader#0" expanded="false" />
+            <element signature="method#fromFile#0;class#ObjectLoader#0" expanded="false" />
+            <element signature="method#parseFile#0;class#ObjectLoader#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_91/jre/lib/deploy.jar!/com/sun/deploy/uitoolkit/impl/awt/ui/FileFilterImpl.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-946">
+          <caret line="5" column="8" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="44" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_91/src.zip!/javax/swing/filechooser/FileFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="268">
+          <caret line="50" column="22" selection-start-line="50" selection-start-column="22" selection-end-line="50" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/company/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="42" column="82" selection-start-line="42" selection-start-column="82" selection-end-line="42" selection-end-column="82" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/company/processor/renderer/impl/RenderInterface3D.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1760">
+          <caret line="89" column="39" selection-start-line="89" selection-start-column="39" selection-end-line="89" selection-end-column="39" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#RenderInterface3D#1;class#RenderInterface3D#0" expanded="false" />
+            <element signature="e#2000#2001#0" expanded="true" />
+            <element signature="e#2050#2051#0" expanded="true" />
             <element signature="class#Transformer#0" expanded="false" />
             <element signature="method#rotateVertex#0;class#Transformer#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/company/Main.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_91/src.zip!/java/awt/Graphics.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="550">
-          <caret line="50" column="17" selection-start-line="50" selection-start-column="17" selection-end-line="50" selection-end-column="17" />
+        <state relative-caret-position="-241">
+          <caret line="394" column="25" selection-start-line="394" selection-start-column="25" selection-end-line="394" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/company/processor/renderer/impl/Renderer3DWireframe.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-88">
+          <caret line="23" column="34" selection-start-line="23" selection-start-column="34" selection-end-line="23" selection-end-column="34" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#setObjects#0;class#Renderer3DWireframe#0" expanded="false" />
           </folding>
         </state>
       </provider>

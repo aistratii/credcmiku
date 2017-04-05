@@ -12,8 +12,26 @@ import java.util.stream.Collectors;
 
 public class ObjectLoader{
 
-    public static Object3D fromFile(String fileName) throws FileNotFoundException {
-        Scanner sc = new Scanner(new File(fileName));
+    public static Object3D fromFileName(String fileName) throws FileNotFoundException {
+        try {
+            return parseFile(new File(fileName));
+        }
+        catch (Exception ex){
+            throw new RuntimeException("Something wrong with the file");
+        }
+    }
+
+    public static Object3D fromFile(File selectedFile) throws FileNotFoundException {
+        try {
+            return parseFile(selectedFile);
+        }
+        catch (Exception ex){
+            throw new RuntimeException("Something wrong with the file");
+        }
+    }
+
+    private static Object3D parseFile(File file) throws FileNotFoundException {
+        Scanner sc = new Scanner(file);
         Object3D obj = new Object3D().setCoord(new Coordinates3D());
         List<Vertex3D> vertex3DList = new ArrayList<>();
 
@@ -35,13 +53,13 @@ public class ObjectLoader{
             else if (line.charAt(0) == 'f'){
                 List<Integer> rowIndexes =
                         Arrays.stream(line.split(" "))
-                        .filter(element -> {
-                            try{
-                                Integer.parseInt(element);
-                                return true;
-                            } catch (Exception ex){return false;}
-                        }).map(element -> Integer.parseInt(element))
-                        .collect(Collectors.toList());
+                                .filter(element -> {
+                                    try{
+                                        Integer.parseInt(element);
+                                        return true;
+                                    } catch (Exception ex){return false;}
+                                }).map(element -> Integer.parseInt(element))
+                                .collect(Collectors.toList());
 
                 Face3D face = new Face3D();
 

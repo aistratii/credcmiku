@@ -2,6 +2,7 @@ package com.company.processor.renderer.impl;
 
 import com.company.entity.camera.Camera;
 import com.company.entity.impl.object3d.*;
+import com.company.environment.scene.generic.Scene;
 import com.company.environment.scene.impl.Scene3D;
 import com.company.processor.renderer.RendererRegister;
 import com.company.processor.renderer.generic.RenderInterface;
@@ -35,6 +36,15 @@ public class RenderInterface3D extends RenderInterface {
         renderer.setCamera(camera);
     }
 
+    public RenderInterface3D(Camera camera, Renderer.RendererType rendererType) {
+        this.scene = new Scene3D();
+        this.camera = camera;
+        bufferedObjects = new ArrayList<>();
+
+        renderer = RendererRegister.getRenderer(rendererType);
+        renderer.setCamera(camera);
+    }
+
     @Override
     public void run() {
         repositionObjects();
@@ -53,12 +63,14 @@ public class RenderInterface3D extends RenderInterface {
 
     @Override
     public BufferedImage getRenderedImage() {
-        /*try {
-            ImageIO.write(renderer.getRenderedImage(), "png", new FileOutputStream(new File("C:\\users\\aistratii\\desktop\\out.png")));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
         return renderer.getRenderedImage();
+    }
+
+    @Override
+    public <T extends Scene> void setScene(T scene) {
+        if (scene instanceof Scene3D)
+            this.scene = (Scene3D) scene;
+        else System.out.println("Wrong scene type: " + scene.getClass().getName() + " - cannot be cast to Scene3D");
     }
 
     private void repositionObjects(){

@@ -11,9 +11,10 @@ import com.company.processor.renderer.impl.RenderInterface3D;
 import com.company.processor.renderer.impl.Renderer3DWireframe;
 import com.company.visual.window.MainWindow;
 import com.company.visual.window.Viewport;
-import javafx.stage.FileChooser;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,23 +23,12 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) throws FileNotFoundException {
-        //ready the object
-        Object3D object3D = ObjectLoader.fromFile("C:\\Users\\aistratii\\Desktop\\test.obj");
-        List<Object3D> objects = new ArrayList<>();
-        objects.add(object3D);
-
-        object3D.setCoord(new Coordinates3D());
-        object3D.getCoord();
-
-        //create scene
-        Scene3D scene3D = new Scene3D(objects);
-
-        //create the render
+        //Renderer
         Renderer renderer = new Renderer3DWireframe();
         RendererRegister.register(Renderer.RendererType.WIREFRAME, renderer);
 
         RenderInterface3D renderInterface =
-                new RenderInterface3D(scene3D,
+                new RenderInterface3D(
                         new Camera(500, 500, 400f)
                                 .setCoord(new Coordinates3D().setZ(3f).setX(-0.5f).setY(-0.5f).setAngleY(30)),
                         Renderer.RendererType.WIREFRAME);
@@ -50,9 +40,22 @@ public class Main {
 
         //select the object
         JFileChooser fc = new JFileChooser();
-        //fc.showOpenDialog(MainWindow.this);
+        fc.addChoosableFileFilter(new FileNameExtensionFilter("obj file", "obj"));
+        fc.showOpenDialog(mainWindow);
 
-        //render
+        //ready the object
+        Object3D object3D = ObjectLoader.fromFile(fc.getSelectedFile());
+        List<Object3D> objects = new ArrayList<>();
+        objects.add(object3D);
+
+        object3D.setCoord(new Coordinates3D());
+        object3D.getCoord();
+
+        //create scene
+        Scene3D scene3D = new Scene3D(objects);
+        renderInterface.setScene(scene3D);
+
+        //FIRE THIS UP MATE
         rendererWhileRotating(2f, 0.2f, 0.7f, 30, viewport, object3D);
     }
 
