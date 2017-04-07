@@ -2,24 +2,19 @@ package com.company.processor.renderer.impl;
 
 import com.company.entity.camera.Camera;
 import com.company.entity.impl.object3d.*;
-import com.company.environment.scene.generic.Scene;
-import com.company.environment.scene.impl.Scene3D;
+import com.company.container.scene.impl.Scene3D;
 import com.company.processor.renderer.RendererRegister;
-import com.company.processor.renderer.generic.RenderInterface;
+import com.company.processor.renderer.generic.SceneContext;
 import com.company.processor.renderer.generic.Renderer;
 
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
-public class RenderInterface3D extends RenderInterface {
+public class SceneContext3D extends SceneContext<Scene3D> {
 
     private ExecutorService executorService = Executors.newFixedThreadPool(3);
     private Scene3D scene;
@@ -27,7 +22,7 @@ public class RenderInterface3D extends RenderInterface {
     private List<Object3D> bufferedObjects;
     private Renderer renderer;
 
-    public RenderInterface3D(Scene3D scene, Camera camera, Renderer.RendererType rendererType) {
+    public SceneContext3D(Scene3D scene, Camera camera, Renderer.RendererType rendererType) {
         this.scene = scene;
         this.camera = camera;
         bufferedObjects = new ArrayList<>();
@@ -36,7 +31,7 @@ public class RenderInterface3D extends RenderInterface {
         renderer.setCamera(camera);
     }
 
-    public RenderInterface3D(Camera camera, Renderer.RendererType rendererType) {
+    public SceneContext3D(Camera camera, Renderer.RendererType rendererType) {
         this.scene = new Scene3D();
         this.camera = camera;
         bufferedObjects = new ArrayList<>();
@@ -67,14 +62,17 @@ public class RenderInterface3D extends RenderInterface {
     }
 
     @Override
-    public <T extends Scene> void setScene(T scene) {
-        if (scene instanceof Scene3D)
-            this.scene = (Scene3D) scene;
-        else System.out.println("Wrong scene type: " + scene.getClass().getName() + " - cannot be cast to Scene3D");
+    public  void setScene(Scene3D scene) {
+            this.scene =  scene;
+    }
+
+    @Override
+    public Scene3D getScene() {
+        return scene;
     }
 
     private void repositionObjects(){
-        List<Object3D> objects = scene.getObjects();
+        List<Object3D> objects = scene.getEntities();
 
         objects = objects.stream().map(object ->
             new Object3D(object).setFaces(

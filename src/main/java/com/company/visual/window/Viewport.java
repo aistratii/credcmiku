@@ -1,22 +1,22 @@
 package com.company.visual.window;
 
-import com.company.processor.renderer.generic.RenderInterface;
+import com.company.processor.renderer.generic.SceneContext;
 
 import javax.swing.*;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-public class Viewport extends JPanel {
-    private RenderInterface renderInterface;
+public class Viewport <T extends SceneContext> extends JPanel {
+    private SceneContext renderInterface;
 
     public Viewport(){}
 
-    public <T extends RenderInterface> Viewport setRenderInterface(T renderInterface){
+    public Viewport setRenderInterface(T renderInterface){
         this.renderInterface = renderInterface;
         return this;
     }
 
-    public Viewport(RenderInterface renderInterface){
+    public Viewport(T renderInterface){
         this.renderInterface = renderInterface;
     }
 

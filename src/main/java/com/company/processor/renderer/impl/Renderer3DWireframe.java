@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 
 import static java.lang.Math.abs;
 
-public class Renderer3DWireframe implements Renderer{
+public class Renderer3DWireframe implements Renderer<Object3D>{
 
     private int pointSize = 4;
     private Color lineColor = new Color(255,255,255);
@@ -103,15 +103,13 @@ public class Renderer3DWireframe implements Renderer{
         this.camera = camera;
     }
 
+
     @Override
-    public <T extends Entity> void setObjects(List<T> objects) {
-        this.objects = objects.stream()
-                .filter(v -> v instanceof Object3D)
-                .map(v -> (Object3D) v)
-                .collect(Collectors.toList());
+    public void setObjects(List<Object3D> objects) {
+        this.objects = objects;
     }
 
-    public void setPointSizeh(int pointSize) {
+    public void setPointSize(int pointSize) {
         this.pointSize = pointSize;
     }
 
