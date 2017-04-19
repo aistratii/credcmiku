@@ -1,6 +1,6 @@
 package com.company.visual.window;
 
-import com.company.processor.renderer.generic.SceneContext;
+import com.company.context.generic.SceneContext;
 
 import javax.swing.*;
 import java.awt.Graphics;

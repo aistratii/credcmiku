@@ -1,10 +1,11 @@
-package com.company.processor.renderer.impl;
+package com.company.context.impl;
 
+import com.company.context.generic.SceneContext;
 import com.company.entity.camera.Camera;
 import com.company.entity.impl.object3d.*;
 import com.company.container.scene.impl.Scene3D;
+import com.company.entity.impl.object3d.Coordinates3D;
 import com.company.processor.renderer.RendererRegister;
-import com.company.processor.renderer.generic.SceneContext;
 import com.company.processor.renderer.generic.Renderer;
 
 import java.awt.image.BufferedImage;

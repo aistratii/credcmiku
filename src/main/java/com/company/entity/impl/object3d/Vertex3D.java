@@ -1,9 +1,5 @@
 package com.company.entity.impl.object3d;
 
-import com.company.entity.generic.Coordinates;
-import com.company.entity.generic.Entity;
-import sun.security.provider.certpath.Vertex;
-
 public class Vertex3D{
     private float x, y, z;
 

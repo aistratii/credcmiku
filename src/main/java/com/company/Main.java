@@ -6,9 +6,9 @@ import com.company.entity.impl.object3d.Object3D;
 import com.company.container.scene.impl.Scene3D;
 import com.company.objectloader.ObjectLoader;
 import com.company.processor.renderer.RendererRegister;
-import com.company.processor.renderer.generic.SceneContext;
+import com.company.context.generic.SceneContext;
 import com.company.processor.renderer.generic.Renderer;
-import com.company.processor.renderer.impl.SceneContext3D;
+import com.company.context.impl.SceneContext3D;
 import com.company.processor.renderer.impl.Renderer3DWireframe;
 import com.company.visual.window.MainWindow;
 import com.company.visual.window.Viewport;
@@ -38,8 +38,11 @@ public class Main {
         //create scene
         initScene(renderInterface, objects);
 
+        //fill object with additional properties
+
+
         //FIRE THIS UP MATE
-        /*objects.forEach(object -> */rendererWhileRotating(2f, 0.2f, 0.7f, 30, viewport, renderInterface);//);
+        rendererWhileRotating(2f, 0.2f, 0.7f, 30, viewport, renderInterface);
     }
 
     private static List<Object3D> initObject(MainWindow mainWindow) throws FileNotFoundException {

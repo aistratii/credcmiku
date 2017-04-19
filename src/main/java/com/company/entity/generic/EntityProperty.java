@@ -1,4 +1,4 @@
 package com.company.entity.generic;
 
-public interface Coordinates{
+public interface EntityProperty {
 }

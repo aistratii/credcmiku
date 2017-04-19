@@ -1,6 +1,7 @@
 package com.company.objectloader;
 
 import com.company.entity.impl.object3d.*;
+import com.company.entity.impl.object3d.Coordinates3D;
 
 import java.io.File;
 import java.io.FileNotFoundException;

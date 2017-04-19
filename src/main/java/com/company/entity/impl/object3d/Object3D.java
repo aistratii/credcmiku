@@ -2,8 +2,7 @@ package com.company.entity.impl.object3d;
 
 import com.company.entity.generic.Coordinates;
 import com.company.entity.generic.Entity;
-import com.sun.javafx.geom.Edge;
-import sun.security.provider.certpath.Vertex;
+import com.company.entity.generic.EntityProperties;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +11,7 @@ public class Object3D implements Entity{
 
     private Coordinates3D coord;
     private List<Face3D> faces;
+    private EntityProperties additionalProperties = new EntityPropertiesObject3D();
 
     public Object3D(){
         coord = new Coordinates3D();
