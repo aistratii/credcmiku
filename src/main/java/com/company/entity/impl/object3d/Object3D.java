@@ -3,6 +3,7 @@ package com.company.entity.impl.object3d;
 import com.company.entity.generic.Coordinates;
 import com.company.entity.generic.Entity;
 import com.company.entity.generic.EntityProperties;
+import com.company.entity.generic.EntityProperty;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +12,7 @@ public class Object3D implements Entity{
 
     private Coordinates3D coord;
     private List<Face3D> faces;
-    private EntityProperties additionalProperties = new EntityPropertiesObject3D();
+    private EntityPropertiesObject3D additionalProperties = new EntityPropertiesObject3D();
 
     public Object3D(){
         coord = new Coordinates3D();
@@ -47,6 +48,16 @@ public class Object3D implements Entity{
     public Object3D setCoord(Coordinates coord) {
         this.coord = (Coordinates3D) coord;
         return this;
+    }
+
+    @Override
+    public void addAdditionalProperty(EntityProperty property) {
+        additionalProperties.addProperty(property);
+    }
+
+    @Override
+    public EntityPropertiesObject3D getAdditionalProperties() {
+        return additionalProperties;
     }
 
     @Override

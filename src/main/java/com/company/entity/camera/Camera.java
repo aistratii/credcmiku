@@ -2,9 +2,14 @@ package com.company.entity.camera;
 
 import com.company.entity.generic.Coordinates;
 import com.company.entity.generic.Entity;
+import com.company.entity.generic.EntityProperties;
+import com.company.entity.generic.EntityProperty;
 import com.company.entity.impl.object3d.Coordinates3D;
+import com.company.entity.impl.object3d.EntityCameraProperties;
+import com.company.entity.impl.object3d.EntityPropertiesObject3D;
 
 public class Camera implements Entity {
+    private EntityProperties entityProperties = new EntityCameraProperties();
 
     private Coordinates3D coord;
     private float focus;
@@ -21,6 +26,16 @@ public class Camera implements Entity {
     public Camera setCoord(Coordinates coord) {
         this.coord = (Coordinates3D) coord;
         return this;
+    }
+
+    @Override
+    public void addAdditionalProperty(EntityProperty property) {
+        entityProperties.addProperty(property);
+    }
+
+    @Override
+    public EntityProperties getAdditionalProperties() {
+        return entityProperties;
     }
 
     @Override

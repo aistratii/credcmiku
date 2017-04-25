@@ -3,12 +3,14 @@ package com.company.entity.impl.object3d;
 import com.company.entity.generic.EntityProperties;
 import com.company.entity.generic.EntityProperty;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
-public class EntityPropertiesObject3D implements EntityProperties {
+public class EntityCameraProperties implements EntityProperties {
     private Map<Class, EntityProperty> properties;
 
-    public EntityPropertiesObject3D(){
+    public EntityCameraProperties(){
         properties = new HashMap<>();
     }
 
