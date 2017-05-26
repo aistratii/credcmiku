@@ -15,6 +15,24 @@ public class Coordinates3D implements Coordinates {
                     isAngleYSinSet, isAngleYCosSet,
                     isAngleZSinSet, isAngleZCosSet;
 
+    public Coordinates3D(Coordinates3D that) {
+        this.x = that.x;
+        this.y = that.y;
+        this.z = that.z;
+
+        this.angleX = that.angleX;
+        this.angleY = that.angleY;
+        this.angleZ = that.angleZ;
+
+        this.angleXSin = that.getAngleXSin();
+        this.angleYSin = that.getAngleYSin();
+        this.angleZSin = that.getAngleZSin();
+
+        this.angleXCos = that.getAngleXCos();
+        this.angleYCos = that.getAngleYCos();
+        this.angleZCos = that.getAngleZCos();
+    }
+
     public Coordinates3D addAngles(float angleX, float angleY, float angleZ) {
         this.angleX = angleX;
         this.angleY = angleY;

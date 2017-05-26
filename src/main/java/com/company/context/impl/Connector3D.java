@@ -3,16 +3,20 @@ package com.company.context.impl;
 import com.company.context.generic.Connector;
 import com.company.entity.impl.object3d.Object3D;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class Connector3D implements Connector<Object3D> {
+public class Connector3D implements Connector<Object3D, ConnectorPort3D> {
     private Object3D object3D;
-    private Set<Port> ports;
+    private String name;
+    private Set<ConnectorPort3D> ports;
 
     @Override
     public void setEntity(Object3D entity) {
+        this.name = entity.getName();
         this.object3D = entity;
     }
 
@@ -22,7 +26,7 @@ public class Connector3D implements Connector<Object3D> {
     }
 
     @Override
-    public Set<Port> getFreePorts() {
+    public Set<ConnectorPort3D> getFreePorts() {
         return ports
                 .stream()
                 .filter(port -> port.isFree())
@@ -30,33 +34,8 @@ public class Connector3D implements Connector<Object3D> {
     }
 
     @Override
-    public void addPort(Port newPort) {
-        if (ports == null)
-            ports = new HashSet<>();
-
+    public void addPort(ConnectorPort3D newPort) {
+        if (ports == null) ports = new LinkedHashSet<>();
         ports.add(newPort);
-    }
-
-    class Port3D implements Port{
-
-        @Override
-        public boolean isConnectable() {
-            return false;
-        }
-
-        @Override
-        public boolean isFree() {
-            return false;
-        }
-
-        @Override
-        public void attach(Object entity) {
-
-        }
-
-        @Override
-        public void detach() {
-
-        }
     }
 }

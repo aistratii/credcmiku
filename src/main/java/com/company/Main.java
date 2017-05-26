@@ -1,9 +1,12 @@
 package com.company;
 
+import com.company.context.impl.Connector3D;
+import com.company.context.impl.RandomContextImpl;
 import com.company.entity.camera.Camera;
 import com.company.entity.impl.object3d.Coordinates3D;
 import com.company.entity.impl.object3d.Object3D;
 import com.company.container.scene.impl.Scene3D;
+import com.company.mocker.Mocker;
 import com.company.objectloader.ObjectLoader;
 import com.company.processor.renderer.RendererRegister;
 import com.company.context.generic.SceneContext;
@@ -25,29 +28,32 @@ public class Main {
 
     public static void main(String[] args) throws FileNotFoundException {
         //Renderer
-        SceneContext<Scene3D> renderInterface = initRenderer();
+        SceneContext<Scene3D> sceneContext = initRenderer();
 
         //Window
         MainWindow mainWindow = new MainWindow("Interactive renderer", 500, 500);
-        Viewport viewport = new Viewport(renderInterface);
+        Viewport viewport = new Viewport(sceneContext);
         mainWindow.addViewport(viewport);
 
         //select the object
         List<Object3D> objects = initObject(mainWindow);
 
         //create scene
-        initScene(renderInterface, objects);
+        initScene(sceneContext, objects);
 
         //fill object with additional properties
 
 
         //FIRE THIS UP MATE
-        rendererWhileRotating(2f, 0.2f, 0.7f, 30, viewport, renderInterface);
+        rendererWhileRotating(2f, 0.2f, 0.7f, 30, viewport, sceneContext);
 
         //==************==
         //test random context
-
-
+        RandomContextImpl randomContext = new RandomContextImpl();
+        randomContext.setContext(sceneContext);
+        List<Connector3D> connectors = Mocker.getMockedConnectors((SceneContext3D) sceneContext);
+        randomContext.addConnectors(connectors);
+        randomContext.triggerCheck();
     }
 
     private static List<Object3D> initObject(MainWindow mainWindow) throws FileNotFoundException {

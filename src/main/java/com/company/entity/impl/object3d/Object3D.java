@@ -12,18 +12,22 @@ public class Object3D implements Entity{
 
     private Coordinates3D coord;
     private List<Face3D> faces;
+    private String name;
 
     public Object3D(){
+        this.name = ObjectNameGenerator.getName();
         coord = new Coordinates3D();
         faces = new ArrayList<>();
     }
 
     public Object3D(List<Face3D> faces){
+        this.name = ObjectNameGenerator.getName();
         this.faces = faces;
     }
 
     public Object3D(Object3D that){
-        this.coord = that.getCoord();
+        this.name = ObjectNameGenerator.getName();
+        this.coord = new Coordinates3D(that.getCoord());
         this.faces = that.getFaces();
     }
 
@@ -49,11 +53,15 @@ public class Object3D implements Entity{
         return this;
     }
 
-    @Override
-    public String toString() {
-        return "Object3D{" +
-                "coord=" + coord +
-                ", faces=" + faces +
-                '}';
+    public String getName() {
+        return name;
+    }
+
+    private static class ObjectNameGenerator{
+        private static int name = 0;
+
+        public static String getName(){
+            return "Object-" + name++;
+        }
     }
 }

@@ -6,18 +6,9 @@ import com.company.entity.generic.EntityProperty;
 
 import java.util.Set;
 
-public interface Connector <E extends Entity> {
-    //<K extends EntityProperties> K getProperty(/*TODO*/);
-    //<K extends EntityProperty> void addProperty(K property);
+public interface Connector <E extends Entity, P extends ConnectorPort> {
     void setEntity(E entity);
     E getEntity();
-    Set<Port> getFreePorts();
-    void addPort(Port newPort);
-
-    interface Port<E> {
-        boolean isConnectable();
-        boolean isFree();
-        void attach(E entity);
-        void detach();
-    }
+    Set<P> getFreePorts();
+    void addPort(P newPort);
 }
