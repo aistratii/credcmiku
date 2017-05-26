@@ -43,6 +43,11 @@ public class Main {
 
         //FIRE THIS UP MATE
         rendererWhileRotating(2f, 0.2f, 0.7f, 30, viewport, renderInterface);
+
+        //==************==
+        //test random context
+
+
     }
 
     private static List<Object3D> initObject(MainWindow mainWindow) throws FileNotFoundException {
