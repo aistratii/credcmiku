@@ -34,20 +34,41 @@ public class ConnectorPort3D implements ConnectorPort<Coordinates3D, ConnectorPo
     public void attachToItself(ConnectorPort3D slavePort) {
         connectedPort = slavePort;
         slavePort.attachTo(this);
-        //todo
+
+        Coordinates3D slaveCoords = slavePort.getCoordinates();
+
+        slaveCoords.setX(coordinates.getX());
+        slaveCoords.setY(coordinates.getY());
+        slaveCoords.setZ(coordinates.getZ());
+
+        slaveCoords.setAngleX(coordinates.getAngleX() + 180);
+        slaveCoords.setAngleY(coordinates.getAngleY() + 180);
+        slaveCoords.setAngleZ(coordinates.getAngleZ() + 180);
     }
 
     @Override
     public void attachTo(ConnectorPort3D masterPort) {
         connectedPort = masterPort;
         masterPort.attachToItself(this);
-        //todo
+
+        Coordinates3D masterCoord = masterPort.getCoordinates();
+
+        coordinates.setX(masterCoord.getX());
+        coordinates.setY(masterCoord.getY());
+        coordinates.setZ(masterCoord.getZ());
+
+        coordinates.setAngleX(masterCoord.getAngleX() + 180);
+        coordinates.setAngleY(masterCoord.getAngleY() + 180);
+        coordinates.setAngleZ(masterCoord.getAngleZ() + 180);
     }
 
     @Override
     public void detach() {
-        connectedPort.detach();
+        ConnectorPort3D tmp = connectedPort;
         connectedPort = null;
+
+        if (tmp != null)
+            tmp.detach();
     }
 
     @Override
