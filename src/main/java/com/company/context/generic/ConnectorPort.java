@@ -1,8 +1,17 @@
 package com.company.context.generic;
 
-public interface ConnectorPort {
+import com.company.entity.generic.Coordinates;
+
+/**
+ * It is a logical entity that is a port for the Connector.
+ * It connects with other ports that has a compatible type.
+ */
+public interface ConnectorPort<E extends Coordinates, P extends ConnectorPort> {
     boolean isConnectable(String thatType);
     boolean isFree();
-    <P extends ConnectorPort> void attach(P port);
+    void attachTo(P masterPort);
+    void attachToItself(P slavePort);
     void detach();
+    String getCurrentType();
+    E getCoordinates();
 }

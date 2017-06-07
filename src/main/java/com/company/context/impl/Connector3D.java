@@ -16,7 +16,7 @@ public class Connector3D implements Connector<Object3D, ConnectorPort3D> {
 
     @Override
     public void setEntity(Object3D entity) {
-        this.name = entity.getName();
+        this.name = entity.getName() +" - [Connector]";
         this.object3D = entity;
     }
 

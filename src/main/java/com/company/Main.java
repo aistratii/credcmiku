@@ -1,12 +1,12 @@
 package com.company;
 
 import com.company.context.impl.Connector3D;
+import com.company.context.impl.ConnectorPort3D;
 import com.company.context.impl.RandomContextImpl;
 import com.company.entity.camera.Camera;
 import com.company.entity.impl.object3d.Coordinates3D;
 import com.company.entity.impl.object3d.Object3D;
 import com.company.container.scene.impl.Scene3D;
-import com.company.mocker.Mocker;
 import com.company.objectloader.ObjectLoader;
 import com.company.processor.renderer.RendererRegister;
 import com.company.context.generic.SceneContext;
@@ -19,7 +19,10 @@ import com.company.visual.window.Viewport;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static java.util.Arrays.asList;
 
@@ -51,9 +54,37 @@ public class Main {
         //test random context
         RandomContextImpl randomContext = new RandomContextImpl();
         randomContext.setContext(sceneContext);
-        List<Connector3D> connectors = Mocker.getMockedConnectors((SceneContext3D) sceneContext);
+        List<Connector3D> connectors = getMockedConnectors((SceneContext3D) sceneContext);
         randomContext.addConnectors(connectors);
         randomContext.triggerCheck();
+    }
+
+    public static List<Connector3D> getMockedConnectors(SceneContext3D context3D) {
+        List<Connector3D> connectors = new ArrayList<>();
+        final Set<String> compatiblePortTypes = new HashSet<>(asList("Type1", "Type2", "Type3"));
+
+        //con1
+        Connector3D connector3D1 = new Connector3D();
+        connector3D1.addPort(new ConnectorPort3D(compatiblePortTypes, "Type1", new Coordinates3D().addCoords(10, 0 , 0)));
+        connector3D1.setEntity(new Object3D(context3D.getScene().getEntities().get(0)));
+
+        connectors.add(connector3D1);
+
+        //con2
+        Connector3D connector3D2 = new Connector3D();
+        connector3D2.addPort(new ConnectorPort3D(compatiblePortTypes, "Type1", new Coordinates3D().addCoords(0, 10 , 0)));
+        connector3D2.setEntity(new Object3D(context3D.getScene().getEntities().get(0)));
+
+        connectors.add(connector3D2);
+
+        //con3
+        Connector3D connector3D3 = new Connector3D();
+        connector3D3.addPort(new ConnectorPort3D(compatiblePortTypes, "Type1", new Coordinates3D().addCoords(0, 0 , 10)));
+        connector3D3.setEntity(new Object3D(context3D.getScene().getEntities().get(0)));
+
+        connectors.add(connector3D3);
+
+        return connectors;
     }
 
     private static List<Object3D> initObject(MainWindow mainWindow) throws FileNotFoundException {
