@@ -12,6 +12,8 @@ public class ConnectorPort3D implements ConnectorPort<Coordinates3D, ConnectorPo
     private ConnectorPort3D connectedPort;
     private final Set<String> compatibleTypes;
     private final String currentType;
+
+    //Port's coordinates are relative to connector's on coordinates
     private final Coordinates3D coordinates;
 
     public ConnectorPort3D(Set<String> compatibleTypes, String currentType, Coordinates3D coordinates) {
@@ -30,12 +32,14 @@ public class ConnectorPort3D implements ConnectorPort<Coordinates3D, ConnectorPo
         return isFree;
     }
 
-    @Override
-    public void attachToItself(ConnectorPort3D slavePort) {
-        connectedPort = slavePort;
-        slavePort.attachTo(this);
 
-        Coordinates3D slaveCoords = slavePort.getCoordinates();
+    @Override
+    public void attachTo(ConnectorPort3D otherPort) {
+        connectedPort = otherPort;
+        otherPort.connectedPort = this;
+        otherPort.isFree = false;
+
+        /* Coordinates3D slaveCoords = slavePort.getCoordinates();
 
         slaveCoords.setX(coordinates.getX());
         slaveCoords.setY(coordinates.getY());
@@ -43,23 +47,9 @@ public class ConnectorPort3D implements ConnectorPort<Coordinates3D, ConnectorPo
 
         slaveCoords.setAngleX(coordinates.getAngleX() + 180);
         slaveCoords.setAngleY(coordinates.getAngleY() + 180);
-        slaveCoords.setAngleZ(coordinates.getAngleZ() + 180);
-    }
+        slaveCoords.setAngleZ(coordinates.getAngleZ() + 180);*/
 
-    @Override
-    public void attachTo(ConnectorPort3D masterPort) {
-        connectedPort = masterPort;
-        masterPort.attachToItself(this);
-
-        Coordinates3D masterCoord = masterPort.getCoordinates();
-
-        coordinates.setX(masterCoord.getX());
-        coordinates.setY(masterCoord.getY());
-        coordinates.setZ(masterCoord.getZ());
-
-        coordinates.setAngleX(masterCoord.getAngleX() + 180);
-        coordinates.setAngleY(masterCoord.getAngleY() + 180);
-        coordinates.setAngleZ(masterCoord.getAngleZ() + 180);
+        isFree = false;
     }
 
     @Override
@@ -69,6 +59,8 @@ public class ConnectorPort3D implements ConnectorPort<Coordinates3D, ConnectorPo
 
         if (tmp != null)
             tmp.detach();
+
+        isFree = true;
     }
 
     @Override

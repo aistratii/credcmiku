@@ -9,8 +9,7 @@ import com.company.entity.generic.Coordinates;
 public interface ConnectorPort<E extends Coordinates, P extends ConnectorPort> {
     boolean isConnectable(String thatType);
     boolean isFree();
-    void attachTo(P masterPort);
-    void attachToItself(P slavePort);
+    void attachTo(P otherPort);
     void detach();
     String getCurrentType();
     E getCoordinates();

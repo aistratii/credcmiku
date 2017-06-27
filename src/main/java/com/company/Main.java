@@ -1,5 +1,6 @@
 package com.company;
 
+import com.company.context.generic.Connector;
 import com.company.context.impl.Connector3D;
 import com.company.context.impl.ConnectorPort3D;
 import com.company.context.impl.RandomContextImpl;
@@ -30,7 +31,7 @@ import static java.util.Arrays.asList;
 public class Main {
 
     public static void main(String[] args) throws FileNotFoundException {
-        //Renderer
+        //Scene context
         SceneContext<Scene3D> sceneContext = initRenderer();
 
         //Window
@@ -44,43 +45,39 @@ public class Main {
         //create scene
         initScene(sceneContext, objects);
 
-        //fill object with additional properties
-
-
         //FIRE THIS UP MATE
         rendererWhileRotating(2f, 0.2f, 0.7f, 30, viewport, sceneContext);
 
         //==************==
         //test random context
         RandomContextImpl randomContext = new RandomContextImpl();
-        randomContext.setContext(sceneContext);
-        List<Connector3D> connectors = getMockedConnectors((SceneContext3D) sceneContext);
+        List<Connector> connectors = getMockedConnectors(sceneContext.getScene().getEntities().get(0));
         randomContext.addConnectors(connectors);
         randomContext.triggerCheck();
     }
 
-    public static List<Connector3D> getMockedConnectors(SceneContext3D context3D) {
-        List<Connector3D> connectors = new ArrayList<>();
+    public static List<Connector> getMockedConnectors(Object3D object) {
+        List<Connector> connectors = new ArrayList<>();
         final Set<String> compatiblePortTypes = new HashSet<>(asList("Type1", "Type2", "Type3"));
 
         //con1
-        Connector3D connector3D1 = new Connector3D();
+        Connector connector3D1 = new Connector3D();
         connector3D1.addPort(new ConnectorPort3D(compatiblePortTypes, "Type1", new Coordinates3D().addCoords(10, 0 , 0)));
-        connector3D1.setEntity(new Object3D(context3D.getScene().getEntities().get(0)));
+        connector3D1.setEntity(new Object3D(object));
 
         connectors.add(connector3D1);
 
         //con2
-        Connector3D connector3D2 = new Connector3D();
-        connector3D2.addPort(new ConnectorPort3D(compatiblePortTypes, "Type1", new Coordinates3D().addCoords(0, 10 , 0)));
-        connector3D2.setEntity(new Object3D(context3D.getScene().getEntities().get(0)));
+        Connector connector3D2 = new Connector3D();
+        connector3D2.addPort(new ConnectorPort3D(compatiblePortTypes, "Type2", new Coordinates3D().addCoords(0, 10 , 0)));
+        connector3D2.setEntity(new Object3D(object));
 
         connectors.add(connector3D2);
 
         //con3
-        Connector3D connector3D3 = new Connector3D();
-        connector3D3.addPort(new ConnectorPort3D(compatiblePortTypes, "Type1", new Coordinates3D().addCoords(0, 0 , 10)));
-        connector3D3.setEntity(new Object3D(context3D.getScene().getEntities().get(0)));
+        Connector connector3D3 = new Connector3D();
+        connector3D3.addPort(new ConnectorPort3D(compatiblePortTypes, "Type3", new Coordinates3D().addCoords(0, 0 , 10)));
+        connector3D3.setEntity(new Object3D(object));
 
         connectors.add(connector3D3);
 
@@ -89,7 +86,7 @@ public class Main {
 
     private static List<Object3D> initObject(MainWindow mainWindow) throws FileNotFoundException {
         JFileChooser fc = new JFileChooser();
-        fc.addChoosableFileFilter(new FileNameExtensionFilter("obj file", "obj"));
+        fc.addChoosableFileFilter(new FileNameExtensionFilter("*.OBJ file", "obj"));
         fc.showOpenDialog(mainWindow);
 
         Object3D object3D = ObjectLoader.fromFile(fc.getSelectedFile());
@@ -100,9 +97,9 @@ public class Main {
         return asList(object3D);
     }
 
-    private static void initScene(SceneContext<Scene3D> renderInterface, List<Object3D> objects) {
+    private static void initScene(SceneContext<Scene3D> sceneContext, List<Object3D> objects) {
         Scene3D scene3D = new Scene3D(objects);
-        renderInterface.setScene(scene3D);
+        sceneContext.setScene(scene3D);
     }
 
     private static SceneContext<Scene3D> initRenderer() {

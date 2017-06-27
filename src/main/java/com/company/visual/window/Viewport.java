@@ -1,35 +1,37 @@
 package com.company.visual.window;
 
 import com.company.context.generic.SceneContext;
+import com.company.processor.renderer.generic.Renderer;
 
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.text.View;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-public class Viewport <T extends SceneContext> extends JPanel {
-    private SceneContext renderInterface;
+public class Viewport /*<T extends SceneContext>*/ extends JPanel {
+    private SceneContext sceneContext;
+    private Renderer render;
 
     public Viewport(){}
 
-    public Viewport setRenderInterface(T renderInterface){
-        this.renderInterface = renderInterface;
-        return this;
+    public <T extends SceneContext> void setSceneContext(T sceneContext){
+        this.sceneContext = sceneContext;
     }
 
-    public Viewport(T renderInterface){
-        this.renderInterface = renderInterface;
+    public <S extends SceneContext> Viewport(S sceneContext){
+        this.render = sceneContext.getRenderer();
+        this.sceneContext = sceneContext;
     }
 
     public void update(){
-        renderInterface.run();
+        render.run(sceneContext);
         repaint();
         paintComponent(this.getGraphics());
     }
 
     @Override
     public void paintComponent(Graphics g){
-        renderInterface.run();
-        BufferedImage bufferedImage = renderInterface.getRenderer().getRenderedImage();
+        BufferedImage bufferedImage = sceneContext.getRenderer().getRenderedImage();
         g.drawImage(bufferedImage, 0, 0, getWidth(), getHeight(), null);
     }
 }

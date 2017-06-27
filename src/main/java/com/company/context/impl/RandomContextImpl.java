@@ -8,19 +8,11 @@ import com.company.context.generic.SceneContext;
 import com.company.entity.generic.Entity;
 import com.company.entity.impl.object3d.Object3D;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RandomContextImpl implements RandomContext{
-    private SceneContext sceneContext;
-    private List<? extends Connector> connectors;
-
-    //boundbox
-    private int width, height;
-
-    @Override
-    public void setContext(SceneContext ctx) {
-        sceneContext = ctx;
-    }
+    private List<? extends Connector> connectors = new ArrayList<>();
 
     @Override
     public void triggerCheck() {

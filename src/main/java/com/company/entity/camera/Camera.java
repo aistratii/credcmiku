@@ -29,16 +29,6 @@ public class Camera implements Entity {
     }
 
     @Override
-    public void addAdditionalProperty(EntityProperty property) {
-        entityProperties.addProperty(property);
-    }
-
-    @Override
-    public EntityProperties getAdditionalProperties() {
-        return entityProperties;
-    }
-
-    @Override
     public Coordinates3D getCoord() {
         return coord;
     }
