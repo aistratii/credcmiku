@@ -8,10 +8,8 @@ import com.company.processor.renderer.generic.Renderer;
 import java.awt.image.BufferedImage;
 
 public abstract class SceneContext<T extends Scene> {
-    public abstract void changeRenderer(Renderer.RendererType rendererType);
-    public abstract Renderer getRenderer();
-    public abstract BufferedImage getRenderedImage();
     public abstract void setScene(T scene);
     public abstract T getScene();
-    public abstract Camera getMainCamera();
+    public abstract Camera getCamera();
+    public abstract void setCamera(Camera camera);
 }

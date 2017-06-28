@@ -3,7 +3,7 @@ package com.company;
 import com.company.context.generic.Connector;
 import com.company.context.impl.Connector3D;
 import com.company.context.impl.ConnectorPort3D;
-import com.company.context.impl.RandomContextImpl;
+import com.company.context.impl.RandomContext;
 import com.company.entity.camera.Camera;
 import com.company.entity.impl.object3d.Coordinates3D;
 import com.company.entity.impl.object3d.Object3D;
@@ -26,34 +26,49 @@ import java.util.List;
 import java.util.Set;
 
 import static java.util.Arrays.asList;
+import static java.util.stream.Collectors.toList;
 
 
 public class Main {
 
     public static void main(String[] args) throws FileNotFoundException {
-        //Scene context
-        SceneContext<Scene3D> sceneContext = initRenderer();
 
         //Window
         MainWindow mainWindow = new MainWindow("Interactive renderer", 500, 500);
-        Viewport viewport = new Viewport(sceneContext);
-        mainWindow.addViewport(viewport);
 
         //select the object
-        List<Object3D> objects = initObject(mainWindow);
+        List<Object3D> objects = mainWindow.openFile();
 
-        //create scene
-        initScene(sceneContext, objects);
-
-        //FIRE THIS UP MATE
-        rendererWhileRotating(2f, 0.2f, 0.7f, 30, viewport, sceneContext);
 
         //==************==
         //test random context
-        RandomContextImpl randomContext = new RandomContextImpl();
-        List<Connector> connectors = getMockedConnectors(sceneContext.getScene().getEntities().get(0));
+        RandomContext randomContext = initRandomContext();
+
+        List<Connector> connectors = getMockedConnectors(objects.get(0));
         randomContext.addConnectors(connectors);
-        randomContext.triggerCheck();
+
+        Viewport viewport = new Viewport(randomContext);
+        mainWindow.addViewport(viewport);
+        viewport.setRenderer(Renderer.RendererType.WIREFRAME_SIMPLE);
+        //==************==
+
+        randomContext.getScene().getEntities().forEach(entity -> entity.getCoord().setX(entity.getCoord().getX() + incr()));
+        //FIRE THIS UP MATE
+        rendererWhileRotating(2f, 0.2f, 0.7f, 30, viewport, randomContext);
+    }
+
+    static int a = 0;
+    static int incr(){return a += 1;}
+
+    private static RandomContext initRandomContext() {
+        Renderer<Object3D> renderer = new Renderer3DWireframe();
+        RendererRegister.register(Renderer.RendererType.WIREFRAME_SIMPLE, renderer);
+
+        RandomContext randomContext = new RandomContext();
+        randomContext.setCamera(new Camera(500, 500, 400f)
+                .setCoord(new Coordinates3D().setZ(3f).setX(-0.5f).setY(-0.5f).setAngleY(30)));
+
+        return randomContext;
     }
 
     public static List<Connector> getMockedConnectors(Object3D object) {
@@ -84,25 +99,12 @@ public class Main {
         return connectors;
     }
 
-    private static List<Object3D> initObject(MainWindow mainWindow) throws FileNotFoundException {
-        JFileChooser fc = new JFileChooser();
-        fc.addChoosableFileFilter(new FileNameExtensionFilter("*.OBJ file", "obj"));
-        fc.showOpenDialog(mainWindow);
-
-        Object3D object3D = ObjectLoader.fromFile(fc.getSelectedFile());
-
-        object3D.setCoord(new Coordinates3D());
-        object3D.getCoord();
-
-        return asList(object3D);
-    }
-
     private static void initScene(SceneContext<Scene3D> sceneContext, List<Object3D> objects) {
         Scene3D scene3D = new Scene3D(objects);
         sceneContext.setScene(scene3D);
     }
 
-    private static SceneContext<Scene3D> initRenderer() {
+    /*private static SceneContext<Scene3D> initRenderer() {
         Renderer<Object3D> renderer = new Renderer3DWireframe();
         RendererRegister.register(Renderer.RendererType.WIREFRAME, renderer);
 
@@ -112,7 +114,7 @@ public class Main {
                                 .setCoord(new Coordinates3D().setZ(3f).setX(-0.5f).setY(-0.5f).setAngleY(30)),
                         Renderer.RendererType.WIREFRAME);
         return renderInterface;
-    }
+    }*/
 
     private static void rendererWhileRotating(float degX, float degY, float degZ,
                                               int timeDelta, Viewport viewport, SceneContext<Scene3D> renderInterface) {
@@ -120,6 +122,7 @@ public class Main {
         renderInterface
                 .getScene()
                 .getEntities()
+                .parallelStream()
                 .forEach(object ->{
                     Coordinates3D coord = object.getCoord();
 

@@ -2,17 +2,14 @@ package com.company.processor.renderer.impl;
 
 import com.company.context.generic.SceneContext;
 import com.company.entity.camera.Camera;
-import com.company.entity.generic.Entity;
 import com.company.entity.impl.object3d.*;
 import com.company.processor.renderer.generic.Renderer;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
-import java.text.CollationElementIterator;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static java.lang.Math.abs;
 
@@ -34,7 +31,7 @@ public class Renderer3DWireframe implements Renderer<Object3D>{
 
     @Override
     public <T extends SceneContext> void run(T sceneContext) {
-        run(sceneContext.getScene().getEntities(), sceneContext.getMainCamera());
+        run(sceneContext.getScene().getEntities(), sceneContext.getCamera());
     }
 
     private BufferedImage drawOnFrame(List<Edge2D> projectedPoints, Camera camera) {
