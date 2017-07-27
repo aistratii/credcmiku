@@ -14,6 +14,7 @@ import com.company.context.generic.SceneContext;
 import com.company.processor.renderer.generic.Renderer;
 import com.company.context.impl.SceneContext3D;
 import com.company.processor.renderer.impl.Renderer3DWireframe;
+import com.company.processor.renderer.impl.Renderer3DWireframeRandom;
 import com.company.visual.window.MainWindow;
 import com.company.visual.window.Viewport;
 
@@ -49,7 +50,8 @@ public class Main {
 
         Viewport viewport = new Viewport(randomContext);
         mainWindow.addViewport(viewport);
-        viewport.setRenderer(Renderer.RendererType.WIREFRAME_SIMPLE);
+        //viewport.setRenderer(Renderer.RendererType.WIREFRAME_SIMPLE);
+        viewport.setRenderer(Renderer.RendererType.WIREFRAME_AND_RANDOM);
         //==************==
 
         randomContext.getScene().getEntities().forEach(entity -> entity.getCoord().setX(entity.getCoord().getX() + incr()));
@@ -61,8 +63,8 @@ public class Main {
     static int incr(){return a += 1;}
 
     private static RandomContext initRandomContext() {
-        Renderer<Object3D> renderer = new Renderer3DWireframe();
-        RendererRegister.register(Renderer.RendererType.WIREFRAME_SIMPLE, renderer);
+        RendererRegister.register(Renderer.RendererType.WIREFRAME_SIMPLE, new Renderer3DWireframe());
+        RendererRegister.register(Renderer.RendererType.WIREFRAME_AND_RANDOM, new Renderer3DWireframeRandom());
 
         RandomContext randomContext = new RandomContext();
         randomContext.setCamera(new Camera(500, 500, 400f)
@@ -103,18 +105,6 @@ public class Main {
         Scene3D scene3D = new Scene3D(objects);
         sceneContext.setScene(scene3D);
     }
-
-    /*private static SceneContext<Scene3D> initRenderer() {
-        Renderer<Object3D> renderer = new Renderer3DWireframe();
-        RendererRegister.register(Renderer.RendererType.WIREFRAME, renderer);
-
-        SceneContext3D renderInterface =
-                new SceneContext3D(
-                        new Camera(500, 500, 400f)
-                                .setCoord(new Coordinates3D().setZ(3f).setX(-0.5f).setY(-0.5f).setAngleY(30)),
-                        Renderer.RendererType.WIREFRAME);
-        return renderInterface;
-    }*/
 
     private static void rendererWhileRotating(float degX, float degY, float degZ,
                                               int timeDelta, Viewport viewport, SceneContext<Scene3D> renderInterface) {

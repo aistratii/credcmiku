@@ -35,6 +35,10 @@ public class RandomContext extends SceneContext<Scene3D>{
         this.camera = camera;
     }
 
+    public List<? extends Connector> getConnectors() {
+        return connectors;
+    }
+
     public void addConnectors(List list) {
         connectors.addAll(list);
 

@@ -34,7 +34,7 @@ public class Renderer3DWireframe implements Renderer<Object3D>{
         run(sceneContext.getScene().getEntities(), sceneContext.getCamera());
     }
 
-    private BufferedImage drawOnFrame(List<Edge2D> projectedPoints, Camera camera) {
+    protected BufferedImage drawOnFrame(List<Edge2D> projectedPoints, Camera camera) {
         BufferedImage frame = new BufferedImage(camera.getWidth(), camera.getHeight(), BufferedImage.TYPE_INT_RGB);
 
         projectedPoints.forEach(edge ->{
@@ -69,7 +69,7 @@ public class Renderer3DWireframe implements Renderer<Object3D>{
         return frame;
     }
 
-    private List<Edge2D> getProjectedPoints(List<Object3D> objects, Camera camera){
+    protected List<Edge2D> getProjectedPoints(List<Object3D> objects, Camera camera){
 
         List<Object3D> bufferedObjects =
             objects.stream().map(object ->
@@ -103,7 +103,7 @@ public class Renderer3DWireframe implements Renderer<Object3D>{
         return newEdges;
     }
 
-    private float safelyDivide(float v1, float v2) {
+    protected float safelyDivide(float v1, float v2) {
         if (v1 == 0 && v2== 0)
             return 0f;
         else if (v2 == 0)
