@@ -20,6 +20,7 @@ public class ConnectorPort3D implements ConnectorPort<Coordinates3D, ConnectorPo
         this.compatibleTypes = compatibleTypes;
         this.currentType = currentType;
         this.coordinates = coordinates;
+        isFree = true;
     }
 
     @Override
@@ -38,17 +39,6 @@ public class ConnectorPort3D implements ConnectorPort<Coordinates3D, ConnectorPo
         connectedPort = otherPort;
         otherPort.connectedPort = this;
         otherPort.isFree = false;
-
-        /* Coordinates3D slaveCoords = slavePort.getCoordinates();
-
-        slaveCoords.setX(coordinates.getX());
-        slaveCoords.setY(coordinates.getY());
-        slaveCoords.setZ(coordinates.getZ());
-
-        slaveCoords.setAngleX(coordinates.getAngleX() + 180);
-        slaveCoords.setAngleY(coordinates.getAngleY() + 180);
-        slaveCoords.setAngleZ(coordinates.getAngleZ() + 180);*/
-
         isFree = false;
     }
 
@@ -60,6 +50,7 @@ public class ConnectorPort3D implements ConnectorPort<Coordinates3D, ConnectorPo
         if (tmp != null)
             tmp.detach();
 
+        tmp.isFree = true;
         isFree = true;
     }
 

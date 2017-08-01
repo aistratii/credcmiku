@@ -7,6 +7,7 @@ import com.company.entity.generic.EntityProperty;
 import com.company.entity.impl.object3d.Coordinates3D;
 import com.company.entity.impl.object3d.EntityCameraProperties;
 import com.company.entity.impl.object3d.EntityPropertiesObject3D;
+import com.company.entity.impl.object3d.Object3D;
 
 public class Camera implements Entity {
     private EntityProperties entityProperties = new EntityCameraProperties();
@@ -14,8 +15,10 @@ public class Camera implements Entity {
     private Coordinates3D coord;
     private float focus;
     private int width, height;
+    private String name;
 
     public Camera(){
+        this.name = Camera.ObjectNameGenerator.getName();
         coord = new Coordinates3D();
         width = 10;
         height = 10;
@@ -26,6 +29,11 @@ public class Camera implements Entity {
     public Camera setCoord(Coordinates coord) {
         this.coord = (Coordinates3D) coord;
         return this;
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 
     @Override
@@ -50,5 +58,13 @@ public class Camera implements Entity {
 
     public int getHeight() {
         return height;
+    }
+
+    private static class ObjectNameGenerator{
+        private static int name = 0;
+
+        public static String getName(){
+            return "Camera-" + name++;
+        }
     }
 }

@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface Scene <T extends Entity>{
     List<T> getEntities();
+    void addEntity(T entity);
 }

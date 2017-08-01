@@ -45,16 +45,20 @@ public class Main {
         //test random context
         RandomContext randomContext = initRandomContext();
 
+        //init connectors based on the prototype of the object
         List<Connector> connectors = getMockedConnectors(objects.get(0));
         randomContext.addConnectors(connectors);
+        randomContext.setScene(new Scene3D(randomContext.getConnectors().stream()
+                        .map(connector -> (Object3D)connector.getEntity())
+                        .collect(toList())));
+        //realign objects
+        randomContext.getScene().getEntities().forEach(entity -> entity.getCoord().setX(entity.getCoord().getX() + incr()));
 
         Viewport viewport = new Viewport(randomContext);
         mainWindow.addViewport(viewport);
-        //viewport.setRenderer(Renderer.RendererType.WIREFRAME_SIMPLE);
         viewport.setRenderer(Renderer.RendererType.WIREFRAME_AND_RANDOM);
         //==************==
 
-        randomContext.getScene().getEntities().forEach(entity -> entity.getCoord().setX(entity.getCoord().getX() + incr()));
         //FIRE THIS UP MATE
         rendererWhileRotating(2f, 0.2f, 0.7f, 30, viewport, randomContext);
     }
@@ -108,26 +112,25 @@ public class Main {
 
     private static void rendererWhileRotating(float degX, float degY, float degZ,
                                               int timeDelta, Viewport viewport, SceneContext<Scene3D> renderInterface) {
+        while(true){
+            List<Object3D> objects = new ArrayList<>(renderInterface
+                    .getScene()
+                    .getEntities());
 
-        renderInterface
-                .getScene()
-                .getEntities()
-                .parallelStream()
-                .forEach(object ->{
-                    Coordinates3D coord = object.getCoord();
+            for (Object3D object: objects){
+                Coordinates3D coord = object.getCoord();
+                if (degX != 0f) coord.setAngleX((coord.getAngleX() + degX) % 360);
+                if (degY != 0f) coord.setAngleY((coord.getAngleY() + degY) % 360);
+                if (degZ != 0f) coord.setAngleZ((coord.getAngleZ() + degZ) % 360);
+                viewport.update();
+            }
 
-                    while(true){
 
-                        if (degX != 0f) coord.setAngleX((coord.getAngleX() + degX) % 360);
-                        if (degY != 0f) coord.setAngleY((coord.getAngleY() + degY) % 360);
-                        if (degZ != 0f) coord.setAngleZ((coord.getAngleZ() + degZ) % 360);
-                        viewport.update();
-                        try {
-                            Thread.sleep(timeDelta);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
+            try {
+                Thread.sleep(timeDelta);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

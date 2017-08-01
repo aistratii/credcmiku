@@ -21,4 +21,9 @@ public class Scene3D implements Scene<Object3D> {
     public List<Object3D> getEntities() {
         return objects;
     }
+
+    @Override
+    public void addEntity(Object3D entity) {
+        this.objects.add(entity);
+    }
 }

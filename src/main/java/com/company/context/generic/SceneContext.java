@@ -2,10 +2,12 @@ package com.company.context.generic;
 
 import com.company.container.scene.generic.Scene;
 import com.company.entity.camera.Camera;
+import com.company.entity.generic.Entity;
 import com.company.entity.impl.object3d.Object3D;
 import com.company.processor.renderer.generic.Renderer;
 
 import java.awt.image.BufferedImage;
+import java.util.Optional;
 
 public abstract class SceneContext<T extends Scene> {
     public abstract void setScene(T scene);
